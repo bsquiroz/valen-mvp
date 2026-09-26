@@ -281,6 +281,39 @@ export type Database = {
           },
         ]
       }
+      feedback: {
+        Row: {
+          created_at: string
+          id: string
+          message: string
+          page: string | null
+          status: Database["public"]["Enums"]["feedback_status"]
+          type: Database["public"]["Enums"]["feedback_type"]
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message: string
+          page?: string | null
+          status?: Database["public"]["Enums"]["feedback_status"]
+          type: Database["public"]["Enums"]["feedback_type"]
+          user_agent?: string | null
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string
+          page?: string | null
+          status?: Database["public"]["Enums"]["feedback_status"]
+          type?: Database["public"]["Enums"]["feedback_type"]
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       lesson_progress: {
         Row: {
           completed_at: string
@@ -544,6 +577,15 @@ export type Database = {
       }
       start_challenge: { Args: { p_challenge_id: string }; Returns: undefined }
       started_course: { Args: { p_course_id: string }; Returns: boolean }
+      submit_feedback: {
+        Args: {
+          p_message: string
+          p_page: string
+          p_type: Database["public"]["Enums"]["feedback_type"]
+          p_user_agent: string
+        }
+        Returns: string
+      }
       super_admin_list_admins: {
         Args: never
         Returns: {
@@ -553,9 +595,33 @@ export type Database = {
           id: string
         }[]
       }
+      super_admin_list_feedback: {
+        Args: never
+        Returns: {
+          created_at: string
+          display_name: string
+          email: string
+          id: string
+          message: string
+          page: string
+          status: Database["public"]["Enums"]["feedback_status"]
+          type: Database["public"]["Enums"]["feedback_type"]
+          user_agent: string
+          user_id: string
+        }[]
+      }
+      super_admin_set_feedback_status: {
+        Args: {
+          p_id: string
+          p_status: Database["public"]["Enums"]["feedback_status"]
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "user" | "admin" | "super_admin"
+      feedback_status: "new" | "in_review" | "resolved" | "dismissed"
+      feedback_type: "suggestion" | "bug" | "complaint" | "improvement"
       pillar: "psychology" | "finance" | "fitness" | "relationships"
       plan_step_kind: "action" | "lesson" | "challenge" | "session"
       score_level: "low" | "medium" | "high"
@@ -687,6 +753,8 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["user", "admin", "super_admin"],
+      feedback_status: ["new", "in_review", "resolved", "dismissed"],
+      feedback_type: ["suggestion", "bug", "complaint", "improvement"],
       pillar: ["psychology", "finance", "fitness", "relationships"],
       plan_step_kind: ["action", "lesson", "challenge", "session"],
       score_level: ["low", "medium", "high"],

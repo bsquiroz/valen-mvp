@@ -20,7 +20,7 @@ Por features, en `app/features/<feature>/`:
 
 El store de Pinia de cada feature vive en `app/features/<feature>/store.ts`.
 
-El shell de la app (header, navegación inferior móvil, menú de usuario) está en `app/features/shell/`. La navegación principal se define en `shell/data/navigation.ts` (máximo 5 ítems por la barra móvil). El layout `focus` (sin navegación: solo el selector de idioma y cerrar sesión) se usa en el diagnóstico, que el usuario debe terminar.
+El shell de la app (header, navegación inferior móvil, menú de usuario) está en `app/features/shell/`. La navegación principal se define en `shell/data/navigation.ts` (máximo 5 ítems por la barra móvil). El layout `focus` (sin navegación: solo el selector de idioma y cerrar sesión) se usa en el diagnóstico, que el usuario debe terminar. Los layouts con sesión incluyen `FeedbackButton` (feature `feedback/`): envía sugerencias y bugs con `submit_feedback` (máx. 10 por hora) y solo el super admin los lee en `/admin/feedback`. Las barras fijas inferiores llaman `registerBottomBar()` para que el botón se oculte y no se tapen.
 
 `app/pages/` solo compone las features. Lo compartido entre features va en `app/components/`, `app/composables/` y `app/lib/`.
 

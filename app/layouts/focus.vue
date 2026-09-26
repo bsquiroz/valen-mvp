@@ -2,6 +2,7 @@
 import { LogOut } from '@lucide/vue'
 import { Button } from '@/components/ui/button'
 import { useSignOut } from '@/features/auth/ui/useSignOut'
+import FeedbackButton from '@/features/feedback/ui/FeedbackButton.vue'
 import LocaleSelect from '@/features/locale/ui/LocaleSelect.vue'
 
 // Layout sin navegación para flujos que el usuario debe terminar (el diagnóstico inicial).
@@ -35,5 +36,6 @@ const { pending, signOut } = useSignOut()
     <main class="mx-auto w-full max-w-5xl flex-1 px-4 pt-6 pb-10">
       <slot />
     </main>
+    <FeedbackButton :with-bottom-nav="false" />
   </div>
 </template>

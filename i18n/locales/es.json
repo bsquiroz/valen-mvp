@@ -134,6 +134,7 @@
       "challenges": "Retos",
       "sessions": "Sesiones en vivo",
       "users": "Usuarios",
+      "feedback": "Sugerencias y bugs",
       "diagnostic": "Diagnóstico",
       "plan": "Plan personal",
       "admins": "Administradores"
@@ -143,7 +144,8 @@
       "plan": "Gestiona los pasos que se asignan según el diagnóstico.",
       "courses": "Crea cursos por pilar y enlaza los videos de Bunny.",
       "challenges": "Crea retos por pilar con su duración en días.",
-      "admins": "Crea y elimina las cuentas de los admins."
+      "admins": "Crea y elimina las cuentas de los admins.",
+      "feedback": "Lo que los usuarios reportan desde el botón de feedback."
     },
     "diagnostic": {
       "description": "Preguntas activas por pilar y puntaje de cada opción.",
@@ -306,6 +308,30 @@
       "scoreRange": "El puntaje debe estar entre 0 y 3.",
       "minOptions": "Agrega al menos 2 respuestas.",
       "maxOptions": "Máximo 6 respuestas."
+    },
+    "feedback": {
+      "description": "Sugerencias, bugs, quejas y oportunidades de mejora enviadas por los usuarios.",
+      "filterStatus": "Filtrar por estado",
+      "filterType": "Filtrar por tipo",
+      "allTypes": "Todos los tipos",
+      "statuses": {
+        "all": "Todos",
+        "new": "Nuevos",
+        "in_review": "En revisión",
+        "resolved": "Resueltos",
+        "dismissed": "Descartados"
+      },
+      "actions": {
+        "in_review": "Pasar a revisión",
+        "resolved": "Marcar resuelto",
+        "dismissed": "Descartar"
+      },
+      "from": "De",
+      "page": "Página",
+      "browser": "Navegador",
+      "empty": "No hay mensajes con estos filtros.",
+      "loadError": "No pudimos cargar los mensajes. Inténtalo de nuevo.",
+      "actionError": "No se pudo cambiar el estado. Inténtalo de nuevo."
     }
   },
   "common": {
@@ -325,7 +351,8 @@
     },
     "form": {
       "completeRequired": "Completa los campos obligatorios para continuar."
-    }
+    },
+    "close": "Cerrar"
   },
   "pillars": {
     "psychology": "Psicología",
@@ -486,5 +513,37 @@
     "streak": "Racha de 1 día | Racha de {count} días",
     "actionError": "No se pudo guardar. Inténtalo de nuevo.",
     "howItWorks": "Haz un check-in cada día. Se completa al acumular {count} días; si te saltas uno, no pierdes lo que llevas."
+  },
+  "feedback": {
+    "open": "Enviar sugerencia o reportar un problema",
+    "title": "¿Cómo podemos mejorar?",
+    "description": "Cuéntanos una sugerencia, una queja o un error. Lo leemos todo.",
+    "typeLabel": "¿Qué quieres contarnos?",
+    "types": {
+      "suggestion": "Sugerencia",
+      "bug": "Bug o error",
+      "complaint": "Queja o reclamo",
+      "improvement": "Oportunidad de mejora"
+    },
+    "messageLabel": "Cuéntanos más",
+    "placeholders": {
+      "default": "Elige un tipo y escribe aquí.",
+      "suggestion": "¿Qué te gustaría que agregáramos o cambiáramos?",
+      "bug": "¿Qué pasó? ¿Qué esperabas que pasara? Si puedes, los pasos para repetirlo.",
+      "complaint": "¿Qué salió mal? Cuéntanos para poder solucionarlo.",
+      "improvement": "¿Qué podríamos hacer mejor y cómo?"
+    },
+    "contextNote": "Incluimos la página en la que estás para entender el contexto.",
+    "send": "Enviar",
+    "sending": "Enviando…",
+    "thanks": "¡Gracias por escribirnos!",
+    "thanksDescription": "Recibimos tu mensaje. Lo revisaremos para seguir mejorando la plataforma.",
+    "errors": {
+      "typeRequired": "Elige un tipo.",
+      "messageMin": "Escribe al menos 10 caracteres.",
+      "messageMax": "Máximo 2000 caracteres.",
+      "rateLimited": "Enviaste muchos mensajes en poco tiempo. Inténtalo más tarde.",
+      "sendFailed": "No pudimos enviar tu mensaje. Inténtalo de nuevo."
+    }
   }
 }

@@ -12,6 +12,8 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{ save: [], discard: [] }>()
+
+registerBottomBar()
 </script>
 
 <template>

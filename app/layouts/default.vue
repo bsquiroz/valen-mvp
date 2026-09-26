@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AppHeader from '@/features/shell/ui/AppHeader.vue'
 import BottomNav from '@/features/shell/ui/BottomNav.vue'
+import FeedbackButton from '@/features/feedback/ui/FeedbackButton.vue'
 </script>
 
 <template>
@@ -11,5 +12,6 @@ import BottomNav from '@/features/shell/ui/BottomNav.vue'
       <slot />
     </main>
     <BottomNav />
+    <FeedbackButton />
   </div>
 </template>

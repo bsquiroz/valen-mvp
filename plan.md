@@ -117,3 +117,5 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 - [ ] Deploy (hosting estático para la SPA) y dominio
 - [ ] Revisión de seguridad de las políticas RLS
 - [ ] Onboarding del primer grupo de usuarios
+- [x] ~~Botón flotante de sugerencias y bugs (tipo + mensaje, máx. 10 por hora) y bandeja en el admin solo para el super admin~~
+- [ ] Probar en el navegador el feedback (enviar desde varias páginas, bandeja, filtros y estados)

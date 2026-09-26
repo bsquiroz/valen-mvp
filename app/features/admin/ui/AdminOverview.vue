@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BookOpen, ChevronRight, ClipboardList, ListChecks, ShieldCheck, Target, Users, Video } from '@lucide/vue'
+import { BookOpen, ChevronRight, ClipboardList, ListChecks, MessageSquarePlus, ShieldCheck, Target, Users, Video } from '@lucide/vue'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useProfileStore } from '@/features/profile/store'
 
@@ -12,6 +12,7 @@ const SECTIONS = [
   { key: 'challenges', icon: Target, to: '/admin/challenges' },
   { key: 'sessions', icon: Video },
   { key: 'users', icon: Users, superAdmin: true },
+  { key: 'feedback', icon: MessageSquarePlus, to: '/admin/feedback', superAdmin: true },
   { key: 'admins', icon: ShieldCheck, to: '/admin/admins', superAdmin: true },
 ] as const
 

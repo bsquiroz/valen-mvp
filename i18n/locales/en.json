@@ -134,6 +134,7 @@
       "challenges": "Challenges",
       "sessions": "Live sessions",
       "users": "Users",
+      "feedback": "Suggestions and bugs",
       "diagnostic": "Assessment",
       "plan": "Personal plan",
       "admins": "Administrators"
@@ -143,7 +144,8 @@
       "plan": "Manage the steps assigned from the assessment.",
       "courses": "Create courses per pillar and link the Bunny videos.",
       "challenges": "Create challenges per pillar with their duration in days.",
-      "admins": "Create and remove admin accounts."
+      "admins": "Create and remove admin accounts.",
+      "feedback": "What users report from the feedback button."
     },
     "diagnostic": {
       "description": "Active questions by pillar and the score of each option.",
@@ -306,6 +308,30 @@
       "scoreRange": "Score must be between 0 and 3.",
       "minOptions": "Add at least 2 answers.",
       "maxOptions": "Up to 6 answers."
+    },
+    "feedback": {
+      "description": "Suggestions, bugs, complaints and improvement ideas sent by users.",
+      "filterStatus": "Filter by status",
+      "filterType": "Filter by type",
+      "allTypes": "All types",
+      "statuses": {
+        "all": "All",
+        "new": "New",
+        "in_review": "In review",
+        "resolved": "Resolved",
+        "dismissed": "Dismissed"
+      },
+      "actions": {
+        "in_review": "Move to review",
+        "resolved": "Mark resolved",
+        "dismissed": "Dismiss"
+      },
+      "from": "From",
+      "page": "Page",
+      "browser": "Browser",
+      "empty": "There are no messages with these filters.",
+      "loadError": "We couldn't load the messages. Please try again.",
+      "actionError": "The status couldn't be changed. Please try again."
     }
   },
   "common": {
@@ -325,7 +351,8 @@
     },
     "form": {
       "completeRequired": "Fill in the required fields to continue."
-    }
+    },
+    "close": "Close"
   },
   "pillars": {
     "psychology": "Psychology",
@@ -486,5 +513,37 @@
     "streak": "1-day streak | {count}-day streak",
     "actionError": "We couldn't save. Please try again.",
     "howItWorks": "Check in every day. It's completed once you reach {count} days; if you skip one, you keep your progress."
+  },
+  "feedback": {
+    "open": "Send a suggestion or report a problem",
+    "title": "How can we improve?",
+    "description": "Tell us a suggestion, a complaint or a bug. We read everything.",
+    "typeLabel": "What would you like to tell us?",
+    "types": {
+      "suggestion": "Suggestion",
+      "bug": "Bug or error",
+      "complaint": "Complaint",
+      "improvement": "Improvement idea"
+    },
+    "messageLabel": "Tell us more",
+    "placeholders": {
+      "default": "Choose a type and write here.",
+      "suggestion": "What would you like us to add or change?",
+      "bug": "What happened? What did you expect? If you can, the steps to reproduce it.",
+      "complaint": "What went wrong? Tell us so we can fix it.",
+      "improvement": "What could we do better, and how?"
+    },
+    "contextNote": "We include the page you're on to understand the context.",
+    "send": "Send",
+    "sending": "Sending…",
+    "thanks": "Thanks for writing to us!",
+    "thanksDescription": "We got your message. We'll review it to keep improving the platform.",
+    "errors": {
+      "typeRequired": "Choose a type.",
+      "messageMin": "Write at least 10 characters.",
+      "messageMax": "2000 characters max.",
+      "rateLimited": "You sent many messages in a short time. Please try again later.",
+      "sendFailed": "We couldn't send your message. Please try again."
+    }
   }
 }
