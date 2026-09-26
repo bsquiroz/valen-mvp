@@ -11,18 +11,6 @@
       "sand": "Arena"
     }
   },
-  "preview": {
-    "description": "Vista previa de los tokens del tema activo.",
-    "card": "Tarjeta",
-    "cardBody": "Texto secundario sobre una superficie de tarjeta.",
-    "primary": "Principal",
-    "secondary": "Secundario",
-    "outline": "Contorno",
-    "destructive": "Eliminar",
-    "success": "Completado",
-    "warning": "Pendiente",
-    "input": "Escribe algo…"
-  },
   "auth": {
     "fields": {
       "displayName": "Nombre",
@@ -90,13 +78,63 @@
     }
   },
   "home": {
-    "greeting": "Hola, {name}"
+    "greeting": "Hola, {name}",
+    "subtitle": "Este es tu espacio de progreso.",
+    "placeholder": "Aquí verás tu avance en cada pilar."
   },
   "locale": {
     "label": "Idioma",
     "names": {
       "es": "Español",
       "en": "English"
+    }
+  },
+  "nav": {
+    "main": "Navegación principal",
+    "menu": "Menú de usuario",
+    "home": "Inicio",
+    "plan": "Mi plan",
+    "courses": "Cursos",
+    "challenges": "Retos",
+    "sessions": "Sesiones",
+    "settings": "Ajustes",
+    "admin": "Administración"
+  },
+  "comingSoon": {
+    "description": "Esta sección llegará pronto."
+  },
+  "settings": {
+    "title": "Ajustes",
+    "description": "Tu perfil y tus preferencias.",
+    "profile": {
+      "title": "Perfil",
+      "description": "Así te verán en la plataforma.",
+      "save": "Guardar",
+      "saved": "Cambios guardados."
+    },
+    "appearance": {
+      "title": "Apariencia",
+      "description": "Elige el tema de la aplicación."
+    },
+    "language": {
+      "title": "Idioma",
+      "description": "Idioma de la aplicación."
+    },
+    "security": {
+      "title": "Seguridad",
+      "description": "Tu cuenta: {email}",
+      "changePassword": "Cambiar contraseña"
+    }
+  },
+  "admin": {
+    "title": "Administración",
+    "description": "Gestiona el contenido y los usuarios de la plataforma.",
+    "badge": "Admin",
+    "sections": {
+      "courses": "Cursos",
+      "challenges": "Retos",
+      "sessions": "Sesiones en vivo",
+      "users": "Usuarios"
     }
   }
 }

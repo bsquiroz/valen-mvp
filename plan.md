@@ -39,10 +39,11 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 - [x] ~~Crear el primer usuario admin (`update profiles set role = 'admin'` desde el SQL Editor)~~
 
 ## Fase 3 — Layout y navegación
-- [ ] Layout de invitado (auth) y layout de la app (mobile-first)
-- [ ] Navegación principal y selector de tema (el de idioma ya está en ambos layouts)
-- [ ] Página de perfil / ajustes
-- [ ] Layout y ruta base del panel de admin
+- [x] ~~Layout de invitado (auth) y layout de la app (mobile-first)~~
+- [x] ~~Navegación principal y selector de tema (el de idioma ya está en ambos layouts)~~
+- [x] ~~Página de perfil / ajustes~~
+- [x] ~~Layout y ruta base del panel de admin~~
+- [x] ~~Páginas placeholder para Mi plan, Cursos, Retos y Sesiones~~
 
 ## Fase 4 — Diagnóstico inicial
 - [ ] Modelo de datos: preguntas por pilar, respuestas y resultado

@@ -11,18 +11,6 @@
       "sand": "Sand"
     }
   },
-  "preview": {
-    "description": "Preview of the active theme tokens.",
-    "card": "Card",
-    "cardBody": "Secondary text on a card surface.",
-    "primary": "Primary",
-    "secondary": "Secondary",
-    "outline": "Outline",
-    "destructive": "Delete",
-    "success": "Completed",
-    "warning": "Pending",
-    "input": "Type something…"
-  },
   "auth": {
     "fields": {
       "displayName": "Name",
@@ -90,13 +78,63 @@
     }
   },
   "home": {
-    "greeting": "Hi, {name}"
+    "greeting": "Hi, {name}",
+    "subtitle": "This is your progress space.",
+    "placeholder": "Your progress in each pillar will show up here."
   },
   "locale": {
     "label": "Language",
     "names": {
       "es": "Español",
       "en": "English"
+    }
+  },
+  "nav": {
+    "main": "Main navigation",
+    "menu": "User menu",
+    "home": "Home",
+    "plan": "My plan",
+    "courses": "Courses",
+    "challenges": "Challenges",
+    "sessions": "Sessions",
+    "settings": "Settings",
+    "admin": "Admin"
+  },
+  "comingSoon": {
+    "description": "This section is coming soon."
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Your profile and preferences.",
+    "profile": {
+      "title": "Profile",
+      "description": "How others will see you on the platform.",
+      "save": "Save",
+      "saved": "Changes saved."
+    },
+    "appearance": {
+      "title": "Appearance",
+      "description": "Choose the app theme."
+    },
+    "language": {
+      "title": "Language",
+      "description": "App language."
+    },
+    "security": {
+      "title": "Security",
+      "description": "Your account: {email}",
+      "changePassword": "Change password"
+    }
+  },
+  "admin": {
+    "title": "Admin",
+    "description": "Manage the platform's content and users.",
+    "badge": "Admin",
+    "sections": {
+      "courses": "Courses",
+      "challenges": "Challenges",
+      "sessions": "Live sessions",
+      "users": "Users"
     }
   }
 }

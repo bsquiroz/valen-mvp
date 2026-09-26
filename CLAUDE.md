@@ -19,6 +19,8 @@ Por features, en `app/features/<feature>/`:
 
 El store de Pinia de cada feature vive en `app/features/<feature>/store.ts`.
 
+El shell de la app (header, navegación inferior móvil, menú de usuario) está en `app/features/shell/`. La navegación principal se define en `shell/data/navigation.ts` (máximo 5 ítems por la barra móvil).
+
 `app/pages/` solo compone las features. Lo compartido entre features va en `app/components/`, `app/composables/` y `app/lib/`.
 
 # Colores y temas
