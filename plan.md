@@ -4,16 +4,16 @@ Al completar una tarea: marcar `[x]` y tacharla con `~~texto~~`.
 Las decisiones de stack y convenciones están en `CLAUDE.md`.
 
 ## Fase 0 — Setup del stack
-- [ ] Configurar `nuxt.config.ts`: `ssr: false`, TypeScript estricto
-- [ ] Instalar y configurar ESLint (`@nuxt/eslint`)
-- [ ] Instalar Tailwind CSS v4 y crear `app/assets/css/main.css`
-- [ ] Inicializar shadcn-vue (`app/components/ui/`)
-- [ ] Instalar Pinia y Zod
-- [ ] Instalar y configurar `@nuxtjs/i18n` (`es` por defecto, `en`) con archivos de locale
-- [ ] Instalar `@nuxtjs/supabase`, crear `app/lib/supabase.ts` y `.env.example`
-- [ ] Instalar y configurar Vitest (con un test de ejemplo)
-- [ ] Crear la estructura base `app/features/`, `app/pages/`, `app/layouts/`
-- [ ] Primer commit
+- [x] ~~Configurar `nuxt.config.ts`: `ssr: false`, TypeScript estricto~~
+- [x] ~~Instalar y configurar ESLint (`@nuxt/eslint`)~~
+- [x] ~~Instalar Tailwind CSS v4 y crear `app/assets/css/main.css`~~
+- [x] ~~Inicializar shadcn-vue (`app/components/ui/`)~~
+- [x] ~~Instalar Pinia y Zod~~
+- [x] ~~Instalar y configurar `@nuxtjs/i18n` (`es` por defecto, `en`) con archivos de locale~~
+- [x] ~~Instalar `@nuxtjs/supabase`, crear `app/lib/supabase.ts` y `.env.example`~~
+- [x] ~~Instalar y configurar Vitest (con un test de ejemplo)~~
+- [x] ~~Crear la estructura base `app/features/`, `app/pages/`, `app/layouts/`~~
+- [x] ~~Primer commit~~
 
 ## Fase 1 — Sistema de temas
 - [ ] Definir el set de tokens semánticos (background, foreground, primary, muted, border, destructive…)

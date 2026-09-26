@@ -40,3 +40,11 @@ Por features, en `app/features/<feature>/`:
 - Validar los formularios con Zod y parsear las respuestas de `api/` con los mappers de `data/`.
 - Diseño mobile-first.
 - Los tests de Vitest cubren como mínimo los mappers y selectors de `data/`.
+
+# Comandos
+- `npm run dev` / `npm run build`
+- `npm run lint` / `npm run lint:fix`
+- `npm test` (Vitest, archivos `app/**/*.test.ts`)
+- `npm run typecheck`
+- Componentes shadcn: `npx shadcn-vue@latest add <componente>` (se generan en `app/components/ui/`)
+- Variables de entorno: copiar `.env.example` a `.env` (`NUXT_PUBLIC_SUPABASE_URL`, `NUXT_PUBLIC_SUPABASE_KEY`)
