@@ -6,6 +6,8 @@ import LocaleSelect from '@/features/locale/ui/LocaleSelect.vue'
 import ProfileForm from '@/features/profile/ui/ProfileForm.vue'
 import ThemeSelect from '@/features/theme/ui/ThemeSelect.vue'
 
+definePageMeta({ diagnosticGate: false })
+
 const auth = useAuthStore()
 </script>
 

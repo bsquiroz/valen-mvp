@@ -31,10 +31,18 @@ export const useProfileStore = defineStore('profile', () => {
     return promise
   }
 
+  // Vuelve a leer el perfil (p. ej. tras completar el diagnóstico).
+  async function refresh() {
+    if (!profile.value) return
+    const userId = profile.value.id
+    request = null
+    await load(userId)
+  }
+
   async function updatePreferences(preferences: ProfilePreferences) {
     if (!profile.value) return
     profile.value = await updateProfile(profile.value.id, preferences)
   }
 
-  return { profile, isAdmin, load, updatePreferences }
+  return { profile, isAdmin, load, refresh, updatePreferences }
 })

@@ -79,8 +79,7 @@
   },
   "home": {
     "greeting": "Hi, {name}",
-    "subtitle": "This is your progress space.",
-    "placeholder": "Your progress in each pillar will show up here."
+    "subtitle": "This is your progress space."
   },
   "locale": {
     "label": "Language",
@@ -134,7 +133,119 @@
       "courses": "Courses",
       "challenges": "Challenges",
       "sessions": "Live sessions",
-      "users": "Users"
+      "users": "Users",
+      "diagnostic": "Assessment"
+    },
+    "sectionDescriptions": {
+      "diagnostic": "Review the questions and try the form."
+    },
+    "diagnostic": {
+      "description": "Active questions by pillar and the score of each option.",
+      "count": "{count} active questions",
+      "tryIt": "Try assessment",
+      "points": "{count} pts",
+      "changesNote": "Changes apply to future assessments; past results aren't recalculated.",
+      "actionError": "The change couldn't be saved and was undone. Please try again.",
+      "question": "Question",
+      "option": "Answer",
+      "options": "Answers",
+      "score": "Score",
+      "scoreOf": "Score for “{option}”",
+      "scoreOfNumber": "Score for answer {number}",
+      "optionNumber": "Answer {number}",
+      "removeOptionRow": "Remove answer {number}",
+      "editQuestion": "Edit question",
+      "deleteQuestion": "Delete question",
+      "editOption": "Edit answer",
+      "deleteOption": "Delete answer",
+      "addOption": "Add answer",
+      "newOption": "New answer",
+      "addQuestionTo": "Add question to {pillar}",
+      "newQuestionIn": "New question in {pillar}",
+      "createQuestion": "Create question",
+      "minOptionsHint": "Each question needs at least 2 answers",
+      "maxOptionsHint": "Up to 6 answers per question",
+      "confirmDeleteQuestion": {
+        "title": "Delete this question?",
+        "description": "The question and its {count} answers will be deleted. What users answered to it will also be deleted; scores already calculated are kept."
+      },
+      "confirmDeleteOption": {
+        "title": "Delete this answer?",
+        "description": "“{option}” will be deleted. If any user chose it, it will be removed from their history; scores already calculated are kept."
+      },
+      "moveQuestion": "Move question {number} of {total}. Use the up and down arrows.",
+      "moveHint": "Drag to reorder (or use ↑ ↓)",
+      "saving": "Saving…"
+    },
+    "errors": {
+      "textRequired": "Fill in this field.",
+      "textTooLong": "The text is too long.",
+      "scoreRange": "Score must be between 0 and 3.",
+      "minOptions": "Add at least 2 answers.",
+      "maxOptions": "Up to 6 answers."
     }
+  },
+  "common": {
+    "loading": "Loading…",
+    "retry": "Try again",
+    "back": "Back",
+    "next": "Next",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "pillars": {
+    "psychology": "Psychology",
+    "finance": "Finance",
+    "fitness": "Fitness",
+    "relationships": "Relationships"
+  },
+  "diagnostic": {
+    "intro": {
+      "title": "Initial assessment",
+      "description": "Knowing your starting point in each pillar lets us build your personal plan.",
+      "length": "{count} multiple-choice questions, about 8–10 minutes.",
+      "honesty": "There are no right answers: answer honestly based on where you are today.",
+      "autosave": "Your progress is saved on this device; you can continue later.",
+      "start": "Start assessment",
+      "continue": "Continue ({answered} of {total})",
+      "restart": "Start over"
+    },
+    "progress": "Question {current} of {total}",
+    "answered": "{answered} of {total} answered",
+    "missing": "{count} left to answer",
+    "submit": "See my results",
+    "submitting": "Calculating…",
+    "loadError": "We couldn't load the assessment. Check your connection and try again.",
+    "submitError": "We couldn't save your answers. Try again; nothing was lost.",
+    "levels": {
+      "low": "Priority",
+      "medium": "Developing",
+      "high": "Strength"
+    },
+    "results": {
+      "title": "Your results",
+      "completedOn": "Assessment from {date}",
+      "byPillar": "Score by pillar",
+      "opportunities": "Your areas of opportunity",
+      "opportunitiesDescription": "These are your lowest-scoring pillars; your personal plan will start here.",
+      "history": "Previous assessments",
+      "retake": "Retake assessment",
+      "empty": "You haven't completed the assessment yet."
+    },
+    "summary": {
+      "title": "Your starting point",
+      "details": "See results"
+    },
+    "preview": {
+      "title": "Preview mode",
+      "description": "Your answers aren't saved and don't count as an assessment. You can move ahead without answering.",
+      "resultTitle": "Test result",
+      "resultDescription": "This is the result a user would see with these answers. It wasn't saved.",
+      "again": "Try again",
+      "review": "Review answers",
+      "backToAdmin": "Back to Assessment"
+    },
+    "outdated": "The assessment was updated while you were answering. We kept your answers; complete the new or changed questions."
   }
 }

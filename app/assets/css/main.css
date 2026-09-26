@@ -18,3 +18,8 @@
     @apply bg-background text-foreground antialiased;
   }
 }
+
+/* Elemento fantasma mientras se arrastra (vue-draggable-plus / SortableJS) */
+.drag-ghost {
+  @apply rounded-md bg-accent opacity-60;
+}

@@ -13,6 +13,7 @@ const profileRowSchema = z.object({
   role: z.enum(ROLES),
   theme: z.enum(THEMES).nullable(),
   locale: z.enum(LOCALES),
+  last_diagnostic_at: z.string().nullable(),
 })
 
 export interface Profile {
@@ -22,6 +23,7 @@ export interface Profile {
   // null = sin preferencia guardada
   theme: ThemeName | null
   locale: Locale
+  lastDiagnosticAt: string | null
 }
 
 export type ProfilePreferences = Partial<Pick<Profile, 'displayName' | 'theme' | 'locale'>>
@@ -34,6 +36,7 @@ export function mapProfile(row: unknown): Profile {
     role: data.role,
     theme: data.theme,
     locale: data.locale,
+    lastDiagnosticAt: data.last_diagnostic_at,
   }
 }
 
@@ -47,4 +50,9 @@ export function toProfileUpdate(preferences: ProfilePreferences) {
 
 export function isAdmin(profile: Profile | null): boolean {
   return profile?.role === 'admin'
+}
+
+// El diagnóstico es obligatorio hasta completarlo una vez (los admins quedan exentos).
+export function needsDiagnostic(profile: Profile | null): boolean {
+  return !!profile && profile.role !== 'admin' && !profile.lastDiagnosticAt
 }

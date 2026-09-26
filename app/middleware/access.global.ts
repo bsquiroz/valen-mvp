@@ -1,5 +1,6 @@
 import { DEFAULT_ACCESS } from '@/features/auth/data/access'
 import { useAuthStore } from '@/features/auth/store'
+import { needsDiagnostic } from '@/features/profile/data/profile'
 import { useProfileStore } from '@/features/profile/store'
 
 export default defineNuxtRouteMiddleware(async (to) => {
@@ -18,6 +19,11 @@ export default defineNuxtRouteMiddleware(async (to) => {
       path: '/auth/login',
       query: to.fullPath === '/' ? {} : { redirect: to.fullPath },
     })
+  }
+
+  if (access === 'user' && to.meta.diagnosticGate !== false) {
+    const profile = await useProfileStore().load(auth.userId).catch(() => null)
+    if (needsDiagnostic(profile)) return navigateTo('/diagnostic')
   }
 
   if (access === 'admin') {

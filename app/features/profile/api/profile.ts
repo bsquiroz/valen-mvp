@@ -2,7 +2,7 @@ import { getSupabase } from '@/lib/supabase'
 import type { Profile, ProfilePreferences } from '../data/profile'
 import { mapProfile, toProfileUpdate } from '../data/profile'
 
-const PROFILE_COLUMNS = 'id, display_name, role, theme, locale'
+const PROFILE_COLUMNS = 'id, display_name, role, theme, locale, last_diagnostic_at'
 
 export async function fetchProfile(userId: string): Promise<Profile | null> {
   const { data, error } = await getSupabase()

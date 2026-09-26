@@ -25,7 +25,7 @@ El shell de la app (header, navegación inferior móvil, menú de usuario) está
 
 # Colores y temas
 - Prohibido usar colores sueltos: nada de hex, rgb ni hsl en componentes, y nada de clases de la paleta de Tailwind (`bg-blue-500`, `text-gray-700`, etc.).
-- Solo se usan tokens semánticos: `background`, `foreground`, `card`, `popover`, `primary`, `secondary`, `muted`, `accent`, `destructive`, `success`, `warning` (cada uno con su `-foreground`), `border`, `input` y `ring`. Por ejemplo: `bg-primary text-primary-foreground`, `text-muted-foreground`.
+- Solo se usan tokens semánticos: `background`, `foreground`, `card`, `popover`, `primary`, `secondary`, `muted`, `accent`, `destructive`, `success`, `warning` (cada uno con su `-foreground`), `border`, `input`, `ring` y `overlay` (fondo de modales). Por ejemplo: `bg-primary text-primary-foreground`, `text-muted-foreground`.
 - El verde (`primary`) es el color de marca, pero se usa con moderación: acciones principales, estados activos y foco. Superficies, hover y fondos secundarios usan los neutros.
 - Los componentes generados por shadcn-vue se revisan al agregarlos: si traen colores sueltos (`text-white`, etc.), se cambian por tokens.
 - La variante `dark:` responde a `data-theme="dark"`, no al sistema operativo.
@@ -38,11 +38,20 @@ El shell de la app (header, navegación inferior móvil, menú de usuario) está
 - Roles `user` y `admin` en `profiles.role`. Las rutas de admin llevan un middleware de rol.
 - RLS activado en todas las tablas. La seguridad se garantiza en la base de datos, no en el frontend.
 - Cada página declara quién puede entrar con `definePageMeta({ access })`: `public`, `guest` (solo sin sesión), `user` (por defecto) o `admin`. Lo aplica `app/middleware/access.global.ts`.
+- Mientras el usuario no complete el diagnóstico, las páginas `user` redirigen a `/diagnostic` (admins exentos). Las páginas que deben verse igual declaran `diagnosticGate: false`.
 - Los textos de error de formularios y de Supabase son claves de i18n (`auth.errors.*`), no mensajes literales.
 
 # Base de datos
 - Todo cambio de esquema va en una migración en `supabase/migrations/` (nunca a mano en el dashboard).
 - Tras cada migración: `npm run db:push` y `npm run db:types` (regenera `app/types/database.types.ts`, no se edita a mano).
+- Supabase da permisos por defecto a `anon`/`authenticated` en tablas nuevas: cada migración hace `revoke all` y concede solo lo necesario.
+- Una sola política permisiva por tabla/rol/acción (combinar condiciones con `or`), y `auth.uid()`/`is_admin()` envueltos en `(select ...)`.
+- Cálculos que el usuario no debe poder falsear (puntajes, progreso) se hacen en funciones de la base, no en el cliente. Si además hay una vista previa de admin, ambas llaman a la misma función de cálculo (p. ej. `compute_diagnostic_scores`).
+- Contenido traducible en la base: columnas `jsonb` `{"es": "...", "en": "..."}` validadas con `is_localized_text()`; en el front, `localizedTextSchema` y `localize()` de `app/lib/localizedText.ts`.
+- Los pilares (`psychology`, `finance`, `fitness`, `relationships`) son el enum `public.pillar` y `PILLARS` en `app/lib/pillars.ts`.
+- Verificar después de migrar: `npx supabase db advisors --linked`. Para probar SQL contra el remoto sin dejar datos: `npx supabase db query --linked -f archivo.sql` dentro de `begin; … rollback;`.
+- Un `update`/`delete` que RLS filtra no da error, devuelve 0 filas: en `api/` usar `.select('id')` y tratar 0 filas como fallo.
+- Operaciones de admin que requieren atomicidad o reglas entre filas (crear con hijos, reordenar, mínimos) van en RPC `admin_*` con `is_admin()` al inicio.
 - Funciones `security definer` siempre con `set search_path = ''`. Los permisos de columna se restringen con `grant update (...)`.
 
 # Idioma
@@ -52,6 +61,7 @@ El shell de la app (header, navegación inferior móvil, menú de usuario) está
 - Todo texto nuevo se agrega en ambos locales.
 
 # Convenciones
+- Editores de contenido del admin: edición en línea con `LocalizedTextEditor` (ES/EN), `ScoreSelect`, `IconAction` (lápiz/papelera visibles al hover en desktop, siempre en móvil) y `ConfirmDelete` para borrar. Un solo editor abierto a la vez.
 - Validar los formularios con Zod y parsear las respuestas de `api/` con los mappers de `data/`.
 - Diseño mobile-first.
 - Los tests de Vitest cubren como mínimo los mappers y selectors de `data/`.

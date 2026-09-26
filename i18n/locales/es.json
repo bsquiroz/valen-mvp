@@ -79,8 +79,7 @@
   },
   "home": {
     "greeting": "Hola, {name}",
-    "subtitle": "Este es tu espacio de progreso.",
-    "placeholder": "Aquí verás tu avance en cada pilar."
+    "subtitle": "Este es tu espacio de progreso."
   },
   "locale": {
     "label": "Idioma",
@@ -134,7 +133,119 @@
       "courses": "Cursos",
       "challenges": "Retos",
       "sessions": "Sesiones en vivo",
-      "users": "Usuarios"
+      "users": "Usuarios",
+      "diagnostic": "Diagnóstico"
+    },
+    "sectionDescriptions": {
+      "diagnostic": "Revisa las preguntas y prueba el formulario."
+    },
+    "diagnostic": {
+      "description": "Preguntas activas por pilar y puntaje de cada opción.",
+      "count": "{count} preguntas activas",
+      "tryIt": "Probar diagnóstico",
+      "points": "{count} pts",
+      "changesNote": "Los cambios aplican a los próximos diagnósticos; los resultados anteriores no se recalculan.",
+      "actionError": "No se pudo guardar el cambio; se deshizo. Inténtalo de nuevo.",
+      "question": "Pregunta",
+      "option": "Respuesta",
+      "options": "Respuestas",
+      "score": "Puntaje",
+      "scoreOf": "Puntaje de «{option}»",
+      "scoreOfNumber": "Puntaje de la respuesta {number}",
+      "optionNumber": "Respuesta {number}",
+      "removeOptionRow": "Quitar respuesta {number}",
+      "editQuestion": "Editar pregunta",
+      "deleteQuestion": "Eliminar pregunta",
+      "editOption": "Editar respuesta",
+      "deleteOption": "Eliminar respuesta",
+      "addOption": "Añadir respuesta",
+      "newOption": "Nueva respuesta",
+      "addQuestionTo": "Añadir pregunta a {pillar}",
+      "newQuestionIn": "Nueva pregunta en {pillar}",
+      "createQuestion": "Crear pregunta",
+      "minOptionsHint": "Cada pregunta necesita al menos 2 respuestas",
+      "maxOptionsHint": "Máximo 6 respuestas por pregunta",
+      "confirmDeleteQuestion": {
+        "title": "¿Eliminar esta pregunta?",
+        "description": "Se eliminará la pregunta y sus {count} respuestas. Lo que los usuarios respondieron en ella también se borrará; los puntajes ya calculados se conservan."
+      },
+      "confirmDeleteOption": {
+        "title": "¿Eliminar esta respuesta?",
+        "description": "Se eliminará «{option}». Si algún usuario la eligió, esa respuesta se borrará de su historial; los puntajes ya calculados se conservan."
+      },
+      "moveQuestion": "Mover pregunta {number} de {total}. Usa las flechas arriba y abajo.",
+      "moveHint": "Arrastra para reordenar (o usa ↑ ↓)",
+      "saving": "Guardando…"
+    },
+    "errors": {
+      "textRequired": "Completa este campo.",
+      "textTooLong": "El texto es demasiado largo.",
+      "scoreRange": "El puntaje debe estar entre 0 y 3.",
+      "minOptions": "Agrega al menos 2 respuestas.",
+      "maxOptions": "Máximo 6 respuestas."
     }
+  },
+  "common": {
+    "loading": "Cargando…",
+    "retry": "Reintentar",
+    "back": "Anterior",
+    "next": "Siguiente",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar"
+  },
+  "pillars": {
+    "psychology": "Psicología",
+    "finance": "Finanzas",
+    "fitness": "Fitness",
+    "relationships": "Relaciones"
+  },
+  "diagnostic": {
+    "intro": {
+      "title": "Diagnóstico inicial",
+      "description": "Conocer tu punto de partida en cada pilar nos permite armar tu plan personal.",
+      "length": "{count} preguntas de opción múltiple, unos 8–10 minutos.",
+      "honesty": "No hay respuestas correctas: responde con honestidad según tu situación actual.",
+      "autosave": "Tu avance se guarda en este dispositivo; puedes seguir después.",
+      "start": "Comenzar diagnóstico",
+      "continue": "Continuar ({answered} de {total})",
+      "restart": "Empezar de nuevo"
+    },
+    "progress": "Pregunta {current} de {total}",
+    "answered": "{answered} de {total} respondidas",
+    "missing": "Faltan {count} por responder",
+    "submit": "Ver mis resultados",
+    "submitting": "Calculando…",
+    "loadError": "No pudimos cargar el diagnóstico. Revisa tu conexión e inténtalo de nuevo.",
+    "submitError": "No pudimos guardar tus respuestas. Inténtalo de nuevo; no se perdió nada.",
+    "levels": {
+      "low": "Prioritario",
+      "medium": "En desarrollo",
+      "high": "Fortaleza"
+    },
+    "results": {
+      "title": "Tus resultados",
+      "completedOn": "Diagnóstico del {date}",
+      "byPillar": "Puntaje por pilar",
+      "opportunities": "Tus áreas de oportunidad",
+      "opportunitiesDescription": "Son los pilares con menor puntaje; tu plan personal empezará por aquí.",
+      "history": "Diagnósticos anteriores",
+      "retake": "Repetir diagnóstico",
+      "empty": "Todavía no completaste el diagnóstico."
+    },
+    "summary": {
+      "title": "Tu punto de partida",
+      "details": "Ver resultados"
+    },
+    "preview": {
+      "title": "Modo vista previa",
+      "description": "Tus respuestas no se guardan ni cuentan como diagnóstico. Puedes avanzar sin responder.",
+      "resultTitle": "Resultado de la prueba",
+      "resultDescription": "Este es el resultado que vería un usuario con estas respuestas. No se guardó.",
+      "again": "Probar de nuevo",
+      "review": "Revisar respuestas",
+      "backToAdmin": "Volver a Diagnóstico"
+    },
+    "outdated": "El diagnóstico se actualizó mientras respondías. Guardamos tus respuestas; completa las preguntas nuevas o modificadas."
   }
 }

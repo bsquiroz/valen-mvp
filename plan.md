@@ -46,10 +46,19 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 - [x] ~~Páginas placeholder para Mi plan, Cursos, Retos y Sesiones~~
 
 ## Fase 4 — Diagnóstico inicial
-- [ ] Modelo de datos: preguntas por pilar, respuestas y resultado
-- [ ] Flujo del diagnóstico para el usuario
-- [ ] Cálculo de puntaje por pilar (selectors en `data/` + tests)
-- [ ] Pantalla de resultados con áreas de oportunidad
+- [x] ~~Modelo de datos: preguntas por pilar, respuestas y resultado~~
+- [x] ~~Flujo del diagnóstico para el usuario~~
+- [x] ~~Cálculo de puntaje por pilar (selectors en `data/` + tests)~~
+- [x] ~~Pantalla de resultados con áreas de oportunidad~~
+- [x] ~~Contenido inicial: 10 preguntas de opción múltiple por pilar (es/en)~~
+- [x] ~~Diagnóstico obligatorio hasta completarlo; repetible con historial~~
+- [x] ~~Admin: ver preguntas con puntajes y probar el diagnóstico en modo vista previa (sin guardar)~~
+- [x] ~~Admin: UI para editar, añadir y eliminar preguntas/respuestas y cambiar puntajes~~
+- [x] ~~Admin: reordenar preguntas dentro de su pilar con drag and drop (y teclado ↑ ↓)~~
+- [x] ~~Admin: guardar la edición del diagnóstico en Supabase (migración, RPCs de crear/añadir/borrar/reordenar, API con cambios optimistas)~~
+- [x] ~~Diagnóstico del usuario: si el admin cambia preguntas mientras responde, se recargan conservando sus respuestas~~
+- [ ] Revisar y ajustar el contenido de las preguntas con los profesionales de cada pilar
+- [ ] Activar "Leaked password protection" en Supabase Auth (si el plan lo permite)
 
 ## Fase 5 — Plan personal
 - [ ] Definir cómo el diagnóstico genera la ruta de aprendizaje

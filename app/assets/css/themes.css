@@ -30,6 +30,7 @@
   --border: oklch(0.905 0.005 160);
   --input: oklch(0.905 0.005 160);
   --ring: oklch(0.5 0.1 155);
+  --overlay: oklch(0.2 0.012 160 / 55%);
 }
 
 [data-theme="dark"] {
@@ -57,6 +58,7 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.7 0.12 155);
+  --overlay: oklch(0 0 0 / 70%);
 }
 
 /* Arena: claro cálido, tipo papel, con un verde más profundo. */
@@ -85,6 +87,7 @@
   --border: oklch(0.87 0.02 80);
   --input: oklch(0.87 0.02 80);
   --ring: oklch(0.46 0.09 152);
+  --overlay: oklch(0.25 0.02 60 / 50%);
 }
 
 @theme inline {
@@ -116,4 +119,5 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-overlay: var(--overlay);
 }
