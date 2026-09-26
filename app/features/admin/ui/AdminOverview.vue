@@ -1,15 +1,21 @@
 <script setup lang="ts">
-import { BookOpen, ChevronRight, ClipboardList, Target, Users, Video } from '@lucide/vue'
+import { BookOpen, ChevronRight, ClipboardList, ShieldCheck, Target, Users, Video } from '@lucide/vue'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { useProfileStore } from '@/features/profile/store'
 
 // Secciones del panel. Las que no tienen `to` todavía no existen (se construyen con su feature).
-const sections = [
+// `superAdmin`: datos de usuarios y cuentas, solo para el super admin.
+const SECTIONS = [
   { key: 'diagnostic', icon: ClipboardList, to: '/admin/diagnostic' },
   { key: 'courses', icon: BookOpen },
   { key: 'challenges', icon: Target },
   { key: 'sessions', icon: Video },
-  { key: 'users', icon: Users },
+  { key: 'users', icon: Users, superAdmin: true },
+  { key: 'admins', icon: ShieldCheck, to: '/admin/admins', superAdmin: true },
 ] as const
+
+const profileStore = useProfileStore()
+const sections = computed(() => SECTIONS.filter(section => !('superAdmin' in section) || profileStore.isSuperAdmin))
 
 const NuxtLink = resolveComponent('NuxtLink')
 </script>

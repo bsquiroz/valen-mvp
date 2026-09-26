@@ -134,10 +134,12 @@
       "challenges": "Challenges",
       "sessions": "Live sessions",
       "users": "Users",
-      "diagnostic": "Assessment"
+      "diagnostic": "Assessment",
+      "admins": "Administrators"
     },
     "sectionDescriptions": {
-      "diagnostic": "Review the questions and try the form."
+      "diagnostic": "Review the questions and try the form.",
+      "admins": "Create and remove admin accounts."
     },
     "diagnostic": {
       "description": "Active questions by pillar and the score of each option.",
@@ -246,6 +248,52 @@
       "review": "Review answers",
       "backToAdmin": "Back to Assessment"
     },
-    "outdated": "The assessment was updated while you were answering. We kept your answers; complete the new or changed questions."
+    "outdated": "The assessment was updated while you were answering. We kept your answers; complete the new or changed questions.",
+    "alreadyCompleted": "You've already completed the assessment. It's only taken once; your results and plan are ready."
+  },
+  "plan": {
+    "title": "My plan",
+    "description": "Your pillars ordered by priority based on your latest assessment. Start at the top.",
+    "progress": "{done} of {total} steps completed",
+    "pillarProgress": "{done} of {total} completed",
+    "priority": "Priority {number}",
+    "noSteps": "No steps for this pillar yet.",
+    "noDiagnostic": "Complete the assessment to generate your personal plan.",
+    "loadError": "We couldn't load your plan. Check your connection and try again.",
+    "toggleError": "The change couldn't be saved. Please try again.",
+    "updateNote": "You can retake the assessment one more time: your plan will update and what you've completed is kept.",
+    "next": {
+      "title": "Your next step",
+      "doneTitle": "Plan completed!",
+      "doneDescription": "You've completed every step in your plan. Great work!",
+      "open": "See my plan"
+    }
+  },
+  "admins": {
+    "description": "Admins manage the platform's content. They can't see user data or create other admins.",
+    "listTitle": "Admins",
+    "listDescription": "Accounts with access to the content panel.",
+    "empty": "There are no admins yet.",
+    "loadError": "We couldn't load the admins. Please try again.",
+    "createdOn": "Created on {date}",
+    "createTitle": "New admin",
+    "createDescription": "The account is active right away, without email confirmation.",
+    "createHint": "Share the password with the admin through a secure channel. If they forget it, you can set a new one from this list.",
+    "create": "Create admin",
+    "created": "Admin created.",
+    "changePassword": "Change password",
+    "newPassword": "New password",
+    "passwordChanged": "Password updated.",
+    "delete": "Remove admin",
+    "confirmDelete": {
+      "title": "Remove this admin?",
+      "description": "The account {email} will be deleted and won't be able to sign in. This can't be undone."
+    },
+    "errors": {
+      "emailTaken": "An account with that email already exists.",
+      "forbidden": "You don't have permission for this action.",
+      "notFound": "The account no longer exists.",
+      "passwordMax": "The password can be at most 72 characters."
+    }
   }
 }

@@ -4,11 +4,14 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { useAuthStore } from '@/features/auth/store'
+import { usePlanStore } from '@/features/plan/store'
+import { canTakeDiagnostic } from '@/features/profile/data/profile'
 import { useProfileStore } from '@/features/profile/store'
 import { localize } from '@/lib/localizedText'
 import { previewDiagnostic } from '../api/diagnostic'
 import type { PillarScores as Scores } from '../data/diagnostic'
-import { answeredCount, isDiagnosticComplete, isOutdatedAnswersError, resumeIndex } from '../data/diagnostic'
+import { answeredCount, isAlreadyCompletedError, isDiagnosticComplete, isOutdatedAnswersError, resumeIndex } from '../data/diagnostic'
 import { useDiagnosticStore } from '../store'
 import OpportunityAreas from './OpportunityAreas.vue'
 import PillarScores from './PillarScores.vue'
@@ -20,10 +23,12 @@ const props = defineProps<{ preview?: boolean }>()
 const session = useDiagnosticSession({ persistDraft: !props.preview })
 const { questions, answers } = session
 const store = useDiagnosticStore()
+const auth = useAuthStore()
 const profileStore = useProfileStore()
+const planStore = usePlanStore()
 const currentLocale = useContentLocale()
 
-const status = ref<'loading' | 'loadError' | 'intro' | 'questions' | 'submitting' | 'previewResult'>('loading')
+const status = ref<'loading' | 'loadError' | 'intro' | 'questions' | 'submitting' | 'previewResult' | 'alreadyCompleted'>('loading')
 const submitError = ref(false)
 // El diagnóstico cambió mientras se respondía y hay preguntas nuevas o distintas
 const outdated = ref(false)
@@ -39,6 +44,11 @@ const isLast = computed(() => index.value === total.value - 1)
 async function load() {
   status.value = 'loading'
   try {
+    // El diagnóstico se responde una sola vez: si ya lo hizo, va a sus resultados
+    if (!props.preview && !canTakeDiagnostic(await profileStore.load(auth.userId))) {
+      await navigateTo('/diagnostic/results', { replace: true })
+      return
+    }
     await session.start()
     index.value = resumeIndex(questions.value, answers.value)
     status.value = 'intro'
@@ -91,12 +101,22 @@ async function submit() {
       return
     }
     await store.submit(questions.value, answers.value)
+    // El plan se recalcula en la base al completar el diagnóstico
+    planStore.invalidate()
     session.reset()
     await profileStore.refresh()
     await navigateTo('/diagnostic/results')
   }
   catch (error) {
     if (isOutdatedAnswersError(error) && await reloadQuestions()) return
+    // Ya lo completó (p. ej. desde otra pestaña)
+    if (isAlreadyCompletedError(error)) {
+      session.reset()
+      planStore.invalidate()
+      await profileStore.refresh().catch(() => {})
+      status.value = 'alreadyCompleted'
+      return
+    }
     submitError.value = true
     status.value = 'questions'
   }
@@ -144,6 +164,20 @@ async function reloadQuestions(): Promise<boolean> {
         @click="load"
       >
         {{ $t('common.retry') }}
+      </Button>
+    </div>
+
+    <div
+      v-else-if="status === 'alreadyCompleted'"
+      class="flex flex-col items-start gap-4"
+    >
+      <Alert>
+        <AlertDescription>{{ $t('diagnostic.alreadyCompleted') }}</AlertDescription>
+      </Alert>
+      <Button as-child>
+        <NuxtLink to="/diagnostic/results">
+          {{ $t('diagnostic.summary.details') }}
+        </NuxtLink>
       </Button>
     </div>
 

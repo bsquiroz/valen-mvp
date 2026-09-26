@@ -157,9 +157,75 @@ export type Database = {
           },
         ]
       }
+      plan_step_templates: {
+        Row: {
+          created_at: string
+          description: Json | null
+          id: string
+          is_active: boolean
+          kind: Database["public"]["Enums"]["plan_step_kind"]
+          levels: Database["public"]["Enums"]["score_level"][]
+          pillar: Database["public"]["Enums"]["pillar"]
+          position: number
+          title: Json
+        }
+        Insert: {
+          created_at?: string
+          description?: Json | null
+          id?: string
+          is_active?: boolean
+          kind?: Database["public"]["Enums"]["plan_step_kind"]
+          levels: Database["public"]["Enums"]["score_level"][]
+          pillar: Database["public"]["Enums"]["pillar"]
+          position: number
+          title: Json
+        }
+        Update: {
+          created_at?: string
+          description?: Json | null
+          id?: string
+          is_active?: boolean
+          kind?: Database["public"]["Enums"]["plan_step_kind"]
+          levels?: Database["public"]["Enums"]["score_level"][]
+          pillar?: Database["public"]["Enums"]["pillar"]
+          position?: number
+          title?: Json
+        }
+        Relationships: []
+      }
+      plan_steps: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          template_id: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          template_id: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          template_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "plan_steps_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "plan_step_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
+          diagnostic_retake_allowed: boolean
           display_name: string
           id: string
           last_diagnostic_at: string | null
@@ -170,6 +236,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          diagnostic_retake_allowed?: boolean
           display_name?: string
           id: string
           last_diagnostic_at?: string | null
@@ -180,6 +247,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          diagnostic_retake_allowed?: boolean
           display_name?: string
           id?: string
           last_diagnostic_at?: string | null
@@ -226,8 +294,13 @@ export type Database = {
           score: number
         }[]
       }
+      dev_allow_diagnostic_retake: {
+        Args: { p_user_id: string }
+        Returns: undefined
+      }
       is_admin: { Args: never; Returns: boolean }
       is_localized_text: { Args: { value: Json }; Returns: boolean }
+      is_super_admin: { Args: never; Returns: boolean }
       is_valid_diagnostic_option: { Args: { value: Json }; Returns: boolean }
       preview_diagnostic: {
         Args: { p_answers: Json }
@@ -236,10 +309,29 @@ export type Database = {
           score: number
         }[]
       }
+      rebuild_plan: {
+        Args: { p_attempt_id: string; p_user_id: string }
+        Returns: undefined
+      }
+      score_level: {
+        Args: { p_score: number }
+        Returns: Database["public"]["Enums"]["score_level"]
+      }
+      super_admin_list_admins: {
+        Args: never
+        Returns: {
+          created_at: string
+          display_name: string
+          email: string
+          id: string
+        }[]
+      }
     }
     Enums: {
-      app_role: "user" | "admin"
+      app_role: "user" | "admin" | "super_admin"
       pillar: "psychology" | "finance" | "fitness" | "relationships"
+      plan_step_kind: "action" | "lesson" | "challenge" | "session"
+      score_level: "low" | "medium" | "high"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -367,8 +459,10 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["user", "admin"],
+      app_role: ["user", "admin", "super_admin"],
       pillar: ["psychology", "finance", "fitness", "relationships"],
+      plan_step_kind: ["action", "lesson", "challenge", "session"],
+      score_level: ["low", "medium", "high"],
     },
   },
 } as const

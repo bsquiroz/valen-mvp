@@ -3,12 +3,14 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { formatDate } from '@/lib/dates'
+import { useProfileStore } from '@/features/profile/store'
 import { PILLARS } from '@/lib/pillars'
 import { useDiagnosticStore } from '../store'
 import OpportunityAreas from './OpportunityAreas.vue'
 import PillarScores from './PillarScores.vue'
 
 const store = useDiagnosticStore()
+const profileStore = useProfileStore()
 const { locale } = useI18n()
 
 const status = ref<'loading' | 'error' | 'ready'>('loading')
@@ -81,8 +83,16 @@ onMounted(load)
           </CardTitle>
           <CardDescription>{{ $t('diagnostic.results.opportunitiesDescription') }}</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent class="flex flex-col gap-4">
           <OpportunityAreas :scores="latest.scores" />
+          <Button
+            class="self-start"
+            as-child
+          >
+            <NuxtLink to="/plan">
+              {{ $t('plan.next.open') }}
+            </NuxtLink>
+          </Button>
         </CardContent>
       </Card>
 
@@ -113,7 +123,9 @@ onMounted(load)
         </CardContent>
       </Card>
 
+      <!-- Solo si un desarrollador habilitó repetirlo -->
       <Button
+        v-if="profileStore.profile?.diagnosticRetakeAllowed"
         variant="outline"
         class="self-start"
         as-child

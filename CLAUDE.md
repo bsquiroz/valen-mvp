@@ -35,10 +35,15 @@ El shell de la app (header, navegación inferior móvil, menú de usuario) está
 
 # Auth y roles
 - Login con correo y contraseña de Supabase Auth: registro, confirmación de correo y recuperación de contraseña.
-- Roles `user` y `admin` en `profiles.role`. Las rutas de admin llevan un middleware de rol.
+- Roles en `profiles.role`: `user`, `admin` y `super_admin`. Las rutas de admin llevan un middleware de rol.
+  - `admin` = editor de contenido: gestiona diagnóstico, plan y, más adelante, cursos, retos y sesiones. No ve datos de usuarios (perfiles, respuestas, puntajes, planes) ni gestiona cuentas.
+  - `super_admin` (uno solo, índice único): puede todo. Crea, elimina y cambia la contraseña de los admins desde `/admin/admins` mediante la Edge Function `supabase/functions/admin-users` (service role; los admins se crean con el correo ya confirmado).
+  - Nadie asigna `super_admin` desde la app: solo por SQL.
+  - En la base: `is_admin()` (admin o super_admin) para el contenido, `is_super_admin()` para los datos de usuarios y las cuentas. En el front: `isAdmin()`/`isSuperAdmin()` de `profile/data/profile.ts`.
 - RLS activado en todas las tablas. La seguridad se garantiza en la base de datos, no en el frontend.
-- Cada página declara quién puede entrar con `definePageMeta({ access })`: `public`, `guest` (solo sin sesión), `user` (por defecto) o `admin`. Lo aplica `app/middleware/access.global.ts`.
+- Cada página declara quién puede entrar con `definePageMeta({ access })`: `public`, `guest` (solo sin sesión), `user` (por defecto), `admin` o `super_admin`. Lo aplica `app/middleware/access.global.ts`.
 - Mientras el usuario no complete el diagnóstico, las páginas `user` redirigen a `/diagnostic` (admins exentos). Las páginas que deben verse igual declaran `diagnosticGate: false`.
+- El diagnóstico se responde una sola vez (`complete_diagnostic` rechaza un segundo intento). Solo un desarrollador habilita otro, desde el SQL Editor: `select public.dev_allow_diagnostic_retake('<user_id>');`. El historial y los pasos completados se conservan.
 - Los textos de error de formularios y de Supabase son claves de i18n (`auth.errors.*`), no mensajes literales.
 
 # Base de datos
@@ -48,6 +53,7 @@ El shell de la app (header, navegación inferior móvil, menú de usuario) está
 - Una sola política permisiva por tabla/rol/acción (combinar condiciones con `or`), y `auth.uid()`/`is_admin()` envueltos en `(select ...)`.
 - Cálculos que el usuario no debe poder falsear (puntajes, progreso) se hacen en funciones de la base, no en el cliente. Si además hay una vista previa de admin, ambas llaman a la misma función de cálculo (p. ej. `compute_diagnostic_scores`).
 - Contenido traducible en la base: columnas `jsonb` `{"es": "...", "en": "..."}` validadas con `is_localized_text()`; en el front, `localizedTextSchema` y `localize()` de `app/lib/localizedText.ts`.
+- Niveles por puntaje: `scoreLevel()` en el front y `public.score_level()` en la base usan los mismos umbrales (<40 bajo, <70 medio); si cambian, cambiar ambos.
 - Los pilares (`psychology`, `finance`, `fitness`, `relationships`) son el enum `public.pillar` y `PILLARS` en `app/lib/pillars.ts`.
 - Verificar después de migrar: `npx supabase db advisors --linked`. Para probar SQL contra el remoto sin dejar datos: `npx supabase db query --linked -f archivo.sql` dentro de `begin; … rollback;`.
 - Un `update`/`delete` que RLS filtra no da error, devuelve 0 filas: en `api/` usar `.select('id')` y tratar 0 filas como fallo.

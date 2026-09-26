@@ -43,6 +43,9 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 - [x] ~~Navegación principal y selector de tema (el de idioma ya está en ambos layouts)~~
 - [x] ~~Página de perfil / ajustes~~
 - [x] ~~Layout y ruta base del panel de admin~~
+- [x] ~~Roles `admin` (editor de contenido) y `super_admin` (todo); RLS de datos de usuarios solo para el super admin~~
+- [x] ~~Super admin: crear, eliminar y cambiar la contraseña de admins (Edge Function `admin-users`)~~
+- [ ] Probar en el navegador la gestión de admins (crear → iniciar sesión como admin → cambiar contraseña → eliminar)
 - [x] ~~Páginas placeholder para Mi plan, Cursos, Retos y Sesiones~~
 
 ## Fase 4 — Diagnóstico inicial
@@ -51,7 +54,8 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 - [x] ~~Cálculo de puntaje por pilar (selectors en `data/` + tests)~~
 - [x] ~~Pantalla de resultados con áreas de oportunidad~~
 - [x] ~~Contenido inicial: 10 preguntas de opción múltiple por pilar (es/en)~~
-- [x] ~~Diagnóstico obligatorio hasta completarlo; repetible con historial~~
+- [x] ~~Diagnóstico obligatorio hasta completarlo~~
+- [x] ~~Diagnóstico de un solo intento; solo un desarrollador habilita repetirlo (`dev_allow_diagnostic_retake`)~~
 - [x] ~~Admin: ver preguntas con puntajes y probar el diagnóstico en modo vista previa (sin guardar)~~
 - [x] ~~Admin: UI para editar, añadir y eliminar preguntas/respuestas y cambiar puntajes~~
 - [x] ~~Admin: reordenar preguntas dentro de su pilar con drag and drop (y teclado ↑ ↓)~~
@@ -61,9 +65,13 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 - [ ] Activar "Leaked password protection" en Supabase Auth (si el plan lo permite)
 
 ## Fase 5 — Plan personal
-- [ ] Definir cómo el diagnóstico genera la ruta de aprendizaje
-- [ ] Modelo de datos del plan del usuario
-- [ ] Vista del plan personal
+- [x] ~~Definir cómo el diagnóstico genera la ruta de aprendizaje: pilares por prioridad (menor puntaje primero) y pasos según el nivel de cada pilar~~
+- [x] ~~Modelo de datos del plan del usuario (`plan_step_templates`, `plan_steps`) con RLS~~
+- [x] ~~Generación automática al completar el diagnóstico; al repetirlo se conserva lo completado y se recalcula lo pendiente~~
+- [x] ~~Contenido inicial: 5 pasos por pilar con los niveles a los que aplican (es/en)~~
+- [x] ~~Vista del plan personal con progreso y pasos marcables; siguiente paso en el inicio~~
+- [ ] Admin: gestionar los pasos del plan (mismo patrón que el editor del diagnóstico)
+- [ ] Enlazar pasos a lecciones, retos y sesiones cuando existan (`kind` ya previsto)
 
 ## Fase 6 — Cursos pregrabados
 - [ ] **Decidir el hosting de video**

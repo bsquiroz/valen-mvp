@@ -134,10 +134,12 @@
       "challenges": "Retos",
       "sessions": "Sesiones en vivo",
       "users": "Usuarios",
-      "diagnostic": "Diagnóstico"
+      "diagnostic": "Diagnóstico",
+      "admins": "Administradores"
     },
     "sectionDescriptions": {
-      "diagnostic": "Revisa las preguntas y prueba el formulario."
+      "diagnostic": "Revisa las preguntas y prueba el formulario.",
+      "admins": "Crea y elimina las cuentas de los admins."
     },
     "diagnostic": {
       "description": "Preguntas activas por pilar y puntaje de cada opción.",
@@ -246,6 +248,52 @@
       "review": "Revisar respuestas",
       "backToAdmin": "Volver a Diagnóstico"
     },
-    "outdated": "El diagnóstico se actualizó mientras respondías. Guardamos tus respuestas; completa las preguntas nuevas o modificadas."
+    "outdated": "El diagnóstico se actualizó mientras respondías. Guardamos tus respuestas; completa las preguntas nuevas o modificadas.",
+    "alreadyCompleted": "Ya completaste el diagnóstico. Solo se responde una vez; tus resultados y tu plan ya están listos."
+  },
+  "plan": {
+    "title": "Mi plan",
+    "description": "Tus pilares ordenados por prioridad según tu último diagnóstico. Empieza por arriba.",
+    "progress": "{done} de {total} pasos completados",
+    "pillarProgress": "{done} de {total} completados",
+    "priority": "Prioridad {number}",
+    "noSteps": "Sin pasos por ahora para este pilar.",
+    "noDiagnostic": "Completa el diagnóstico para generar tu plan personal.",
+    "loadError": "No pudimos cargar tu plan. Revisa tu conexión e inténtalo de nuevo.",
+    "toggleError": "No se pudo guardar el cambio. Inténtalo de nuevo.",
+    "updateNote": "Puedes repetir el diagnóstico una vez más: tu plan se actualizará y lo que ya completaste se conserva.",
+    "next": {
+      "title": "Tu siguiente paso",
+      "doneTitle": "¡Plan completado!",
+      "doneDescription": "Completaste todos los pasos de tu plan. ¡Buen trabajo!",
+      "open": "Ver mi plan"
+    }
+  },
+  "admins": {
+    "description": "Los admins gestionan el contenido de la plataforma. No ven los datos de los usuarios ni pueden crear otros admins.",
+    "listTitle": "Admins",
+    "listDescription": "Cuentas con acceso al panel de contenido.",
+    "empty": "Todavía no hay admins.",
+    "loadError": "No pudimos cargar los admins. Inténtalo de nuevo.",
+    "createdOn": "Creado el {date}",
+    "createTitle": "Nuevo admin",
+    "createDescription": "La cuenta queda activa de inmediato, sin confirmar el correo.",
+    "createHint": "Comparte la contraseña con el admin por un medio seguro. Si la olvida, puedes asignarle una nueva desde esta lista.",
+    "create": "Crear admin",
+    "created": "Admin creado.",
+    "changePassword": "Cambiar contraseña",
+    "newPassword": "Nueva contraseña",
+    "passwordChanged": "Contraseña actualizada.",
+    "delete": "Eliminar admin",
+    "confirmDelete": {
+      "title": "¿Eliminar este admin?",
+      "description": "Se eliminará la cuenta {email} y ya no podrá iniciar sesión. Esta acción no se puede deshacer."
+    },
+    "errors": {
+      "emailTaken": "Ya existe una cuenta con ese correo.",
+      "forbidden": "No tienes permiso para esta acción.",
+      "notFound": "La cuenta ya no existe.",
+      "passwordMax": "La contraseña puede tener como máximo 72 caracteres."
+    }
   }
 }

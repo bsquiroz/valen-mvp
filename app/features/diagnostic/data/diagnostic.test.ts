@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import type { DiagnosticQuestion } from './diagnostic'
 import {
   answeredCount,
+  isAlreadyCompletedError,
   isDiagnosticComplete,
   isOutdatedAnswersError,
   mapPillarScores,
@@ -133,5 +134,13 @@ describe('isOutdatedAnswersError', () => {
     expect(isOutdatedAnswersError({ code: '42501' })).toBe(false)
     expect(isOutdatedAnswersError(new Error('x'))).toBe(false)
     expect(isOutdatedAnswersError(null)).toBe(false)
+  })
+})
+
+describe('isAlreadyCompletedError', () => {
+  it('detects a second attempt', () => {
+    expect(isAlreadyCompletedError({ code: 'P0001', hint: 'diagnostic_already_completed' })).toBe(true)
+    expect(isAlreadyCompletedError({ code: 'P0001', hint: null })).toBe(false)
+    expect(isAlreadyCompletedError(null)).toBe(false)
   })
 })

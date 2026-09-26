@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import PlanView from '@/features/plan/ui/PlanView.vue'
+</script>
+
 <template>
-  <ComingSoon :title="$t('nav.plan')" />
+  <PlanView />
 </template>

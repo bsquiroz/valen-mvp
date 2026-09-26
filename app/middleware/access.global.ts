@@ -26,9 +26,10 @@ export default defineNuxtRouteMiddleware(async (to) => {
     if (needsDiagnostic(profile)) return navigateTo('/diagnostic')
   }
 
-  if (access === 'admin') {
+  if (access === 'admin' || access === 'super_admin') {
     const profileStore = useProfileStore()
     await profileStore.load(auth.userId).catch(() => null)
     if (!profileStore.isAdmin) return navigateTo('/')
+    if (access === 'super_admin' && !profileStore.isSuperAdmin) return navigateTo('/admin')
   }
 })

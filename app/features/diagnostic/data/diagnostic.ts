@@ -152,3 +152,8 @@ export function opportunityAreas(scores: PillarScores, count = 2): Pillar[] {
 export function isOutdatedAnswersError(error: unknown): boolean {
   return typeof error === 'object' && error !== null && 'code' in error && error.code === '22023'
 }
+
+// complete_diagnostic rechaza un segundo intento (el diagnóstico se responde una sola vez).
+export function isAlreadyCompletedError(error: unknown): boolean {
+  return typeof error === 'object' && error !== null && 'hint' in error && error.hint === 'diagnostic_already_completed'
+}

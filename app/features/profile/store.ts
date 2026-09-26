@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia'
 import { fetchProfile, updateProfile } from './api/profile'
 import type { Profile, ProfilePreferences } from './data/profile'
-import { isAdmin as isAdminProfile } from './data/profile'
+import { isAdmin as isAdminProfile, isSuperAdmin as isSuperAdminProfile } from './data/profile'
 
 export const useProfileStore = defineStore('profile', () => {
   const profile = ref<Profile | null>(null)
   const isAdmin = computed(() => isAdminProfile(profile.value))
+  const isSuperAdmin = computed(() => isSuperAdminProfile(profile.value))
 
   let request: { userId: string, promise: Promise<Profile | null> } | null = null
 
@@ -44,5 +45,5 @@ export const useProfileStore = defineStore('profile', () => {
     profile.value = await updateProfile(profile.value.id, preferences)
   }
 
-  return { profile, isAdmin, load, refresh, updatePreferences }
+  return { profile, isAdmin, isSuperAdmin, load, refresh, updatePreferences }
 })

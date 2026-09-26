@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DiagnosticSummaryCard from '@/features/diagnostic/ui/DiagnosticSummaryCard.vue'
+import PlanNextStepCard from '@/features/plan/ui/PlanNextStepCard.vue'
 import { useProfileStore } from '@/features/profile/store'
 
 const profileStore = useProfileStore()
@@ -11,6 +12,7 @@ const profileStore = useProfileStore()
       :title="profileStore.profile?.displayName ? $t('home.greeting', { name: profileStore.profile.displayName }) : $t('app.welcome')"
       :description="$t('home.subtitle')"
     />
+    <PlanNextStepCard />
     <DiagnosticSummaryCard />
   </div>
 </template>
