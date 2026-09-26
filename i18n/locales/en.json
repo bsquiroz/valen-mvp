@@ -22,5 +22,81 @@
     "success": "Completed",
     "warning": "Pending",
     "input": "Type something…"
+  },
+  "auth": {
+    "fields": {
+      "displayName": "Name",
+      "email": "Email",
+      "password": "Password",
+      "newPassword": "New password",
+      "passwordConfirm": "Confirm password"
+    },
+    "login": {
+      "title": "Sign in",
+      "description": "Sign in with your email and password.",
+      "submit": "Sign in",
+      "forgotPassword": "Forgot your password?",
+      "noAccount": "Don't have an account?",
+      "toRegister": "Sign up"
+    },
+    "register": {
+      "title": "Create your account",
+      "description": "Start your personal development journey.",
+      "submit": "Create account",
+      "hasAccount": "Already have an account?",
+      "toLogin": "Sign in"
+    },
+    "checkEmail": {
+      "title": "Check your email",
+      "description": "We sent you a link to confirm your account.",
+      "descriptionWithEmail": "We sent a link to {email} to confirm your account.",
+      "resend": "Resend confirmation email",
+      "resent": "Done, we sent you a new email."
+    },
+    "confirm": {
+      "invalidTitle": "Invalid link",
+      "invalidDescription": "The confirmation link is invalid or has expired. Sign in or request a new email."
+    },
+    "forgotPassword": {
+      "title": "Reset your password",
+      "description": "We'll send you a link to create a new password.",
+      "submit": "Send link",
+      "sent": "If the email is registered, you'll receive a link to create a new password."
+    },
+    "updatePassword": {
+      "title": "New password",
+      "submit": "Save password",
+      "done": "Your password has been updated.",
+      "continue": "Continue",
+      "expiredTitle": "Link expired",
+      "expiredDescription": "The password link is invalid or has expired. Request a new one."
+    },
+    "signOut": "Sign out",
+    "errors": {
+      "emailRequired": "Enter your email.",
+      "emailInvalid": "Enter a valid email.",
+      "passwordRequired": "Enter your password.",
+      "passwordMin": "Password must be at least 8 characters.",
+      "passwordMismatch": "Passwords don't match.",
+      "nameRequired": "Enter your name.",
+      "nameMax": "Name is too long.",
+      "invalidCredentials": "Incorrect email or password.",
+      "emailNotConfirmed": "You haven't confirmed your email yet.",
+      "userAlreadyExists": "An account with this email already exists.",
+      "weakPassword": "The password is too weak.",
+      "samePassword": "The new password must be different from the current one.",
+      "rateLimit": "Too many attempts. Wait a few minutes and try again.",
+      "unknown": "Something went wrong. Please try again."
+    }
+  },
+  "home": {
+    "greeting": "Hi, {name}"
+  },
+  "locale": {
+    "label": "Language",
+    "names": {
+      "es": "Español",
+      "en": "English"
+    }
   }
 }

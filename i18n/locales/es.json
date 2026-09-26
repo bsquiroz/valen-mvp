@@ -22,5 +22,81 @@
     "success": "Completado",
     "warning": "Pendiente",
     "input": "Escribe algo…"
+  },
+  "auth": {
+    "fields": {
+      "displayName": "Nombre",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "newPassword": "Nueva contraseña",
+      "passwordConfirm": "Confirmar contraseña"
+    },
+    "login": {
+      "title": "Inicia sesión",
+      "description": "Entra con tu correo y contraseña.",
+      "submit": "Entrar",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "noAccount": "¿No tienes cuenta?",
+      "toRegister": "Regístrate"
+    },
+    "register": {
+      "title": "Crea tu cuenta",
+      "description": "Empieza tu proceso de desarrollo personal.",
+      "submit": "Crear cuenta",
+      "hasAccount": "¿Ya tienes cuenta?",
+      "toLogin": "Inicia sesión"
+    },
+    "checkEmail": {
+      "title": "Revisa tu correo",
+      "description": "Te enviamos un enlace para confirmar tu cuenta.",
+      "descriptionWithEmail": "Te enviamos un enlace a {email} para confirmar tu cuenta.",
+      "resend": "Reenviar correo de confirmación",
+      "resent": "Listo, te enviamos un nuevo correo."
+    },
+    "confirm": {
+      "invalidTitle": "Enlace inválido",
+      "invalidDescription": "El enlace de confirmación no es válido o ya expiró. Inicia sesión o solicita un nuevo correo."
+    },
+    "forgotPassword": {
+      "title": "Recupera tu contraseña",
+      "description": "Te enviaremos un enlace para crear una nueva contraseña.",
+      "submit": "Enviar enlace",
+      "sent": "Si el correo está registrado, recibirás un enlace para crear una nueva contraseña."
+    },
+    "updatePassword": {
+      "title": "Nueva contraseña",
+      "submit": "Guardar contraseña",
+      "done": "Tu contraseña se actualizó.",
+      "continue": "Continuar",
+      "expiredTitle": "Enlace expirado",
+      "expiredDescription": "El enlace para cambiar tu contraseña no es válido o ya expiró. Solicita uno nuevo."
+    },
+    "signOut": "Cerrar sesión",
+    "errors": {
+      "emailRequired": "Ingresa tu correo.",
+      "emailInvalid": "Ingresa un correo válido.",
+      "passwordRequired": "Ingresa tu contraseña.",
+      "passwordMin": "La contraseña debe tener al menos 8 caracteres.",
+      "passwordMismatch": "Las contraseñas no coinciden.",
+      "nameRequired": "Ingresa tu nombre.",
+      "nameMax": "El nombre es demasiado largo.",
+      "invalidCredentials": "Correo o contraseña incorrectos.",
+      "emailNotConfirmed": "Aún no confirmas tu correo.",
+      "userAlreadyExists": "Ya existe una cuenta con este correo.",
+      "weakPassword": "La contraseña es demasiado débil.",
+      "samePassword": "La nueva contraseña debe ser distinta a la actual.",
+      "rateLimit": "Demasiados intentos. Espera unos minutos y vuelve a intentarlo.",
+      "unknown": "Algo salió mal. Inténtalo de nuevo."
+    }
+  },
+  "home": {
+    "greeting": "Hola, {name}"
+  },
+  "locale": {
+    "label": "Idioma",
+    "names": {
+      "es": "Español",
+      "en": "English"
+    }
   }
 }

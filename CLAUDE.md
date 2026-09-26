@@ -35,10 +35,18 @@ El store de Pinia de cada feature vive en `app/features/<feature>/store.ts`.
 - Login con correo y contraseña de Supabase Auth: registro, confirmación de correo y recuperación de contraseña.
 - Roles `user` y `admin` en `profiles.role`. Las rutas de admin llevan un middleware de rol.
 - RLS activado en todas las tablas. La seguridad se garantiza en la base de datos, no en el frontend.
+- Cada página declara quién puede entrar con `definePageMeta({ access })`: `public`, `guest` (solo sin sesión), `user` (por defecto) o `admin`. Lo aplica `app/middleware/access.global.ts`.
+- Los textos de error de formularios y de Supabase son claves de i18n (`auth.errors.*`), no mensajes literales.
+
+# Base de datos
+- Todo cambio de esquema va en una migración en `supabase/migrations/` (nunca a mano en el dashboard).
+- Tras cada migración: `npm run db:push` y `npm run db:types` (regenera `app/types/database.types.ts`, no se edita a mano).
+- Funciones `security definer` siempre con `set search_path = ''`. Los permisos de columna se restringen con `grant update (...)`.
 
 # Idioma
 - Código en inglés: identificadores, nombres de archivos, tablas y columnas.
-- Todo texto visible sale de i18n (`es` por defecto y `en`). No se escriben strings hardcodeados en templates.
+- Español es el idioma por defecto; no se detecta el idioma del navegador. El usuario lo cambia desde cualquier pantalla con `LocaleSelect` (presente en todos los layouts; todo layout nuevo debe incluirlo). La elección se guarda en localStorage y en `profiles.locale`.
+- Todo texto visible sale de i18n (`es` y `en`). No se escriben strings hardcodeados en templates.
 - Todo texto nuevo se agrega en ambos locales.
 
 # Convenciones

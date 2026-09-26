@@ -1,15 +1,22 @@
 <script setup lang="ts">
 // Página temporal para revisar los temas; se reemplaza en la Fase 3
 import { Button } from '@/components/ui/button'
+import SignOutButton from '@/features/auth/ui/SignOutButton.vue'
+import { useProfileStore } from '@/features/profile/store'
 import ThemeSelect from '@/features/theme/ui/ThemeSelect.vue'
+
+const profileStore = useProfileStore()
 </script>
 
 <template>
   <main class="mx-auto flex max-w-2xl flex-col gap-6 p-4">
     <header class="flex flex-col gap-1">
-      <h1 class="text-2xl font-semibold">
-        {{ $t('app.welcome') }}
-      </h1>
+      <div class="flex items-center justify-between gap-2">
+        <h1 class="text-2xl font-semibold">
+          {{ profileStore.profile?.displayName ? $t('home.greeting', { name: profileStore.profile.displayName }) : $t('app.welcome') }}
+        </h1>
+        <SignOutButton />
+      </div>
       <p class="text-muted-foreground">
         {{ $t('preview.description') }}
       </p>

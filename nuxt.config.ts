@@ -41,6 +41,8 @@ export default defineNuxtConfig({
   i18n: {
     defaultLocale: 'es',
     strategy: 'no_prefix',
+    // Español siempre por defecto; la elección del usuario la persiste la feature `locale`
+    detectBrowserLanguage: false,
     locales: [
       { code: 'es', language: 'es', name: 'Español', file: 'es.json' },
       { code: 'en', language: 'en', name: 'English', file: 'en.json' },
@@ -55,7 +57,8 @@ export default defineNuxtConfig({
   supabase: {
     // Las redirecciones de auth se manejan con middleware propio (Fase 2)
     redirect: false,
-    // Los tipos de la base se generan en la Fase 2
-    types: false,
+    // SPA: la sesión vive en localStorage, no en cookies
+    useSsrCookies: false,
+    // Tipos generados con `npm run db:types` en ~/types/database.types.ts (ruta por defecto del módulo)
   },
 })

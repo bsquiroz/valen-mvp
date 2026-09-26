@@ -25,18 +25,22 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 - [ ] (Opcional) Regla de lint o script que detecte colores sueltos
 
 ## Fase 2 — Supabase: base y auth
-- [ ] Crear el proyecto en Supabase y configurar las variables de entorno
-- [ ] Inicializar Supabase CLI con migraciones versionadas en el repo
-- [ ] Tabla `profiles` (id, display_name, role, theme, locale, timestamps) + trigger al registrarse
-- [ ] Políticas RLS para `profiles`
-- [ ] Generar los tipos de la base de datos para TypeScript
-- [ ] Feature `auth`: registro, login, confirmación de correo, recuperar y cambiar contraseña
-- [ ] Middleware de rutas: autenticado, invitado y admin
-- [ ] Sincronizar el tema y el idioma con `profiles`
+- [x] ~~Crear el proyecto en Supabase y configurar las variables de entorno~~
+- [x] ~~Inicializar Supabase CLI con migraciones versionadas en el repo~~
+- [x] ~~Tabla `profiles` (id, display_name, role, theme, locale, timestamps) + trigger al registrarse~~
+- [x] ~~Políticas RLS para `profiles`~~
+- [x] ~~Generar los tipos de la base de datos para TypeScript~~
+- [x] ~~Feature `auth`: registro, login, confirmación de correo, recuperar y cambiar contraseña~~
+- [x] ~~Middleware de rutas: autenticado, invitado y admin~~
+- [x] ~~Sincronizar el tema y el idioma con `profiles`~~
+- [x] ~~Idioma: español por defecto (sin detección del navegador) y selector disponible en toda la app~~
+- [x] ~~Configurar Auth en el dashboard: Site URL, Redirect URLs (`http://localhost:3000/**`) y contraseña mínima de 8~~
+- [x] ~~Probar el flujo completo en el navegador (registro → confirmación → login → recuperar contraseña)~~
+- [x] ~~Crear el primer usuario admin (`update profiles set role = 'admin'` desde el SQL Editor)~~
 
 ## Fase 3 — Layout y navegación
 - [ ] Layout de invitado (auth) y layout de la app (mobile-first)
-- [ ] Navegación principal y selector de tema e idioma
+- [ ] Navegación principal y selector de tema (el de idioma ya está en ambos layouts)
 - [ ] Página de perfil / ajustes
 - [ ] Layout y ruta base del panel de admin
 
