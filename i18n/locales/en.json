@@ -142,6 +142,7 @@
       "diagnostic": "Review the questions and try the form.",
       "plan": "Manage the steps assigned from the assessment.",
       "courses": "Create courses per pillar and link the Bunny videos.",
+      "challenges": "Create challenges per pillar with their duration in days.",
       "admins": "Create and remove admin accounts."
     },
     "diagnostic": {
@@ -266,6 +267,38 @@
       "charCount": "{count}/{max}",
       "durationPlaceholder": "e.g. 14:54",
       "videoIdPlaceholder": "e.g. b534be45-7bfd-4b55-981a-931ea20dadb5"
+    },
+    "challenges": {
+      "pageDescription": "Practical challenges for each pillar. Users check in once a day until they complete the duration.",
+      "count": "{active} of {total} challenges active",
+      "changesNote": "A challenge someone started can't be deleted: deactivate it. Changing the days applies to people who start it later.",
+      "loadError": "We couldn't load the challenges. Please try again.",
+      "inUseError": "Some challenges were already started by users: deactivate them instead of deleting them.",
+      "unsaved": "1 challenge with unsaved changes | {count} challenges with unsaved changes",
+      "challengeTitle": "Challenge title",
+      "challengeDescription": "Description",
+      "descriptionPlaceholder": "What to do each day and why it helps.",
+      "durationDays": "Duration in days",
+      "durationPlaceholder": "e.g. 7",
+      "durationHint": "Between 1 and 90. With 1 day it is a one-time challenge.",
+      "addChallengeTo": "Add challenge to {pillar}",
+      "newChallengeIn": "New challenge in {pillar}",
+      "createChallenge": "Create challenge",
+      "editChallenge": "Edit challenge",
+      "deleteChallenge": "Delete challenge",
+      "deactivate": "Deactivate challenge",
+      "activate": "Activate challenge",
+      "inactive": "Inactive",
+      "usage": "{started} started · {completed} completed",
+      "deleteDisabledHint": "Already started by users: deactivate it instead.",
+      "moveChallenge": "Move challenge {number} of {total}. Use the up and down arrows.",
+      "confirmDelete": {
+        "title": "Delete this challenge?",
+        "description": "When you save, it will be deleted. Nobody started it, so nobody loses progress."
+      },
+      "errors": {
+        "duration": "Enter a number of days between 1 and 90."
+      }
     },
     "errors": {
       "textRequired": "Fill in this field.",
@@ -432,5 +465,26 @@
     "lessonMeta": "Video · {duration}",
     "lessonMetaNoDuration": "Video",
     "current": "Current lesson"
+  },
+  "challenges": {
+    "title": "Challenges",
+    "description": "Practical exercises to apply what you learn. Start a challenge and check in every day.",
+    "empty": "There are no published challenges yet.",
+    "loadError": "We couldn't load the challenges. Please try again.",
+    "notFound": "This challenge doesn't exist or is no longer available.",
+    "back": "Back to challenges",
+    "inProgressTitle": "In progress",
+    "durationDays": "1 day | {count} days",
+    "oneTime": "One time",
+    "inactive": "Inactive",
+    "start": "Start challenge",
+    "checkIn": "Check in for today",
+    "markDone": "Mark as done",
+    "checkedInToday": "Today's check-in is done. Come back tomorrow.",
+    "completed": "Challenge completed",
+    "dayProgress": "{done} of {total} days",
+    "streak": "1-day streak | {count}-day streak",
+    "actionError": "We couldn't save. Please try again.",
+    "howItWorks": "Check in every day. It's completed once you reach {count} days; if you skip one, you keep your progress."
   }
 }

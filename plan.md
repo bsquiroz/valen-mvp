@@ -79,7 +79,7 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 
 ## Fase 6 — Cursos pregrabados
 - [x] ~~**Decidir el hosting de video**: Bunny Stream (red Volume, autenticación por token; los videos se suben en Bunny y en el admin se pega el ID)~~
-- [ ] Configurar la Video Library de Bunny (red Volume, token authentication, dominios permitidos) y subir videos de prueba
+- [x] ~~Configurar la Video Library de Bunny (red Volume, token authentication, dominios permitidos) y subir videos de prueba~~
 - [x] ~~Modelo de datos: pilar → curso → lecciones (proveedor + ID de video) y progreso por usuario~~
 - [x] ~~Catálogo de cursos y vista de lección con reproductor (enlace firmado por la Edge Function `lesson-video`)~~
 - [x] ~~Marcar lecciones como completadas~~
@@ -88,12 +88,13 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 - [x] ~~Formularios del admin: botón deshabilitado hasta completar lo obligatorio; descripción del curso obligatoria (textarea); duración de lecciones en min:seg~~
 - [x] ~~Vista de lección en grilla: mapa del curso (línea de tiempo con completadas, actual y bloqueadas) a la izquierda y video a la derecha; la misma línea de tiempo en la página del curso~~
 - [x] ~~Guardar `BUNNY_TOKEN_KEY` en los secrets de Supabase y probar la reproducción en el navegador~~
-- [ ] Probar en el navegador el catálogo, el avance de lecciones y el editor de cursos
+- [x] ~~Probar en el navegador el catálogo, el avance de lecciones y el editor de cursos~~
 
 ## Fase 7 — Retos y ejercicios
-- [ ] Modelo de datos: retos por pilar/lección y su seguimiento
-- [ ] Vista de retos y marcarlos como completados
-- [ ] Admin: CRUD de retos
+- [x] ~~Modelo de datos: retos por pilar con duración en días, inscripción y check-ins diarios (se completa al acumular los días; lo calcula la base)~~
+- [x] ~~Vista de retos: catálogo por pilar, "En curso", detalle, check-in del día y racha~~
+- [x] ~~Admin: retos con borrador y "Guardar cambios" (`admin_save_challenges`); retos empezados no se borran, se desactivan~~
+- [ ] Probar en el navegador los retos (empezar, check-in, completar) y su editor
 
 ## Fase 8 — Sesiones en vivo
 - [ ] **Decidir la plataforma (enlace a Zoom/Meet vs. embebido)**

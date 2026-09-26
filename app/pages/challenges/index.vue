@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import ChallengeCatalog from '@/features/challenges/ui/ChallengeCatalog.vue'
+</script>
+
 <template>
-  <ComingSoon :title="$t('nav.challenges')" />
+  <ChallengeCatalog />
 </template>

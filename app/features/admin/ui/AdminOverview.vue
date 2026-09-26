@@ -9,7 +9,7 @@ const SECTIONS = [
   { key: 'diagnostic', icon: ClipboardList, to: '/admin/diagnostic' },
   { key: 'plan', icon: ListChecks, to: '/admin/plan' },
   { key: 'courses', icon: BookOpen, to: '/admin/courses' },
-  { key: 'challenges', icon: Target },
+  { key: 'challenges', icon: Target, to: '/admin/challenges' },
   { key: 'sessions', icon: Video },
   { key: 'users', icon: Users, superAdmin: true },
   { key: 'admins', icon: ShieldCheck, to: '/admin/admins', superAdmin: true },

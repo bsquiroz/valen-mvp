@@ -14,6 +14,100 @@ export type Database = {
   }
   public: {
     Tables: {
+      challenge_checkins: {
+        Row: {
+          challenge_id: string
+          created_at: string
+          day: string
+          user_id: string
+        }
+        Insert: {
+          challenge_id: string
+          created_at?: string
+          day: string
+          user_id: string
+        }
+        Update: {
+          challenge_id?: string
+          created_at?: string
+          day?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "challenge_checkins_user_id_challenge_id_fkey"
+            columns: ["user_id", "challenge_id"]
+            isOneToOne: false
+            referencedRelation: "challenge_enrollments"
+            referencedColumns: ["user_id", "challenge_id"]
+          },
+        ]
+      }
+      challenge_enrollments: {
+        Row: {
+          challenge_id: string
+          completed_at: string | null
+          started_at: string
+          target_days: number
+          user_id: string
+        }
+        Insert: {
+          challenge_id: string
+          completed_at?: string | null
+          started_at?: string
+          target_days: number
+          user_id?: string
+        }
+        Update: {
+          challenge_id?: string
+          completed_at?: string | null
+          started_at?: string
+          target_days?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "challenge_enrollments_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: false
+            referencedRelation: "challenges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      challenges: {
+        Row: {
+          created_at: string
+          description: Json
+          duration_days: number
+          id: string
+          is_active: boolean
+          pillar: Database["public"]["Enums"]["pillar"]
+          position: number
+          title: Json
+        }
+        Insert: {
+          created_at?: string
+          description: Json
+          duration_days: number
+          id?: string
+          is_active?: boolean
+          pillar: Database["public"]["Enums"]["pillar"]
+          position: number
+          title: Json
+        }
+        Update: {
+          created_at?: string
+          description?: Json
+          duration_days?: number
+          id?: string
+          is_active?: boolean
+          pillar?: Database["public"]["Enums"]["pillar"]
+          position?: number
+          title?: Json
+        }
+        Relationships: []
+      }
       courses: {
         Row: {
           created_at: string
@@ -366,6 +460,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_challenge_usage: {
+        Args: never
+        Returns: {
+          challenge_id: string
+          completed: number
+          started: number
+        }[]
+      }
       admin_lesson_usage: {
         Args: never
         Returns: {
@@ -380,9 +482,17 @@ export type Database = {
           users: number
         }[]
       }
+      admin_save_challenges: {
+        Args: { p_challenges: Json }
+        Returns: undefined
+      }
       admin_save_courses: { Args: { p_courses: Json }; Returns: undefined }
       admin_save_diagnostic: { Args: { p_questions: Json }; Returns: undefined }
       admin_save_plan_steps: { Args: { p_steps: Json }; Returns: undefined }
+      challenge_check_in: {
+        Args: { p_challenge_id: string; p_day: string }
+        Returns: undefined
+      }
       complete_diagnostic: { Args: { p_answers: Json }; Returns: string }
       completed_lesson: { Args: { p_lesson_id: string }; Returns: boolean }
       compute_diagnostic_scores: {
@@ -395,6 +505,10 @@ export type Database = {
       dev_allow_diagnostic_retake: {
         Args: { p_user_id: string }
         Returns: undefined
+      }
+      enrolled_in_challenge: {
+        Args: { p_challenge_id: string }
+        Returns: boolean
       }
       is_admin: { Args: never; Returns: boolean }
       is_localized_text: { Args: { value: Json }; Returns: boolean }
@@ -428,6 +542,7 @@ export type Database = {
         Args: { p_score: number }
         Returns: Database["public"]["Enums"]["score_level"]
       }
+      start_challenge: { Args: { p_challenge_id: string }; Returns: undefined }
       started_course: { Args: { p_course_id: string }; Returns: boolean }
       super_admin_list_admins: {
         Args: never

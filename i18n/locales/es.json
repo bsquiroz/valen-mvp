@@ -142,6 +142,7 @@
       "diagnostic": "Revisa las preguntas y prueba el formulario.",
       "plan": "Gestiona los pasos que se asignan según el diagnóstico.",
       "courses": "Crea cursos por pilar y enlaza los videos de Bunny.",
+      "challenges": "Crea retos por pilar con su duración en días.",
       "admins": "Crea y elimina las cuentas de los admins."
     },
     "diagnostic": {
@@ -266,6 +267,38 @@
       "charCount": "{count}/{max}",
       "durationPlaceholder": "Ej. 14:54",
       "videoIdPlaceholder": "Ej. b534be45-7bfd-4b55-981a-931ea20dadb5"
+    },
+    "challenges": {
+      "pageDescription": "Retos prácticos de cada pilar. El usuario hace un check-in por día hasta completar la duración.",
+      "count": "{active} de {total} retos activos",
+      "changesNote": "Un reto que alguien empezó no se puede eliminar: desactívalo. Cambiar los días aplica a quienes lo empiecen después.",
+      "loadError": "No pudimos cargar los retos. Inténtalo de nuevo.",
+      "inUseError": "Hay retos que ya empezaron usuarios: desactívalos en lugar de eliminarlos.",
+      "unsaved": "1 reto con cambios sin guardar | {count} retos con cambios sin guardar",
+      "challengeTitle": "Título del reto",
+      "challengeDescription": "Descripción",
+      "descriptionPlaceholder": "Qué hacer cada día y por qué ayuda.",
+      "durationDays": "Duración en días",
+      "durationPlaceholder": "Ej. 7",
+      "durationHint": "Entre 1 y 90. Con 1 día es un reto de una sola vez.",
+      "addChallengeTo": "Añadir reto a {pillar}",
+      "newChallengeIn": "Nuevo reto en {pillar}",
+      "createChallenge": "Crear reto",
+      "editChallenge": "Editar reto",
+      "deleteChallenge": "Eliminar reto",
+      "deactivate": "Desactivar reto",
+      "activate": "Activar reto",
+      "inactive": "Inactivo",
+      "usage": "{started} lo empezaron · {completed} lo completaron",
+      "deleteDisabledHint": "Ya lo empezaron usuarios: desactívalo en su lugar.",
+      "moveChallenge": "Mover reto {number} de {total}. Usa las flechas arriba y abajo.",
+      "confirmDelete": {
+        "title": "¿Eliminar este reto?",
+        "description": "Al guardar, se eliminará. Nadie lo empezó, así que nadie pierde progreso."
+      },
+      "errors": {
+        "duration": "Escribe un número de días entre 1 y 90."
+      }
     },
     "errors": {
       "textRequired": "Completa este campo.",
@@ -432,5 +465,26 @@
     "lessonMeta": "Video · {duration}",
     "lessonMetaNoDuration": "Video",
     "current": "Lección actual"
+  },
+  "challenges": {
+    "title": "Retos",
+    "description": "Ejercicios prácticos para aplicar lo que aprendes. Empieza un reto y haz un check-in cada día.",
+    "empty": "Todavía no hay retos publicados.",
+    "loadError": "No pudimos cargar los retos. Inténtalo de nuevo.",
+    "notFound": "Este reto no existe o ya no está disponible.",
+    "back": "Volver a retos",
+    "inProgressTitle": "En curso",
+    "durationDays": "1 día | {count} días",
+    "oneTime": "Una vez",
+    "inactive": "Inactivo",
+    "start": "Empezar reto",
+    "checkIn": "Hacer check-in de hoy",
+    "markDone": "Marcar como hecho",
+    "checkedInToday": "Check-in de hoy hecho. Vuelve mañana.",
+    "completed": "Reto completado",
+    "dayProgress": "{done} de {total} días",
+    "streak": "Racha de 1 día | Racha de {count} días",
+    "actionError": "No se pudo guardar. Inténtalo de nuevo.",
+    "howItWorks": "Haz un check-in cada día. Se completa al acumular {count} días; si te saltas uno, no pierdes lo que llevas."
   }
 }
