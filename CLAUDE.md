@@ -17,13 +17,18 @@ Por features, en `app/features/<feature>/`:
 - `data/`: tipos, schemas Zod, mappers (DB → dominio) y selectors. Son funciones puras y testeables.
 - `api/`: el único lugar que importa `@/lib/supabase`. Devuelve datos ya mapeados por `data/`.
 
+El store de Pinia de cada feature vive en `app/features/<feature>/store.ts`.
+
 `app/pages/` solo compone las features. Lo compartido entre features va en `app/components/`, `app/composables/` y `app/lib/`.
 
 # Colores y temas
 - Prohibido usar colores sueltos: nada de hex, rgb ni hsl en componentes, y nada de clases de la paleta de Tailwind (`bg-blue-500`, `text-gray-700`, etc.).
-- Solo se usan tokens semánticos: `bg-background`, `text-foreground`, `bg-primary`, `text-primary-foreground`, `bg-muted`, `text-muted-foreground`, `border-border`, `bg-destructive`, etc.
+- Solo se usan tokens semánticos: `background`, `foreground`, `card`, `popover`, `primary`, `secondary`, `muted`, `accent`, `destructive`, `success`, `warning` (cada uno con su `-foreground`), `border`, `input` y `ring`. Por ejemplo: `bg-primary text-primary-foreground`, `text-muted-foreground`.
+- El verde (`primary`) es el color de marca, pero se usa con moderación: acciones principales, estados activos y foco. Superficies, hover y fondos secundarios usan los neutros.
+- Los componentes generados por shadcn-vue se revisan al agregarlos: si traen colores sueltos (`text-white`, etc.), se cambian por tokens.
+- La variante `dark:` responde a `data-theme="dark"`, no al sistema operativo.
 - Los tokens se definen como CSS variables en `app/assets/css/themes.css`, un bloque por tema (`[data-theme="<name>"]`), y se exponen a Tailwind con `@theme inline`.
-- Para agregar un tema, se define el set completo de tokens. Para agregar un token, se define en todos los temas.
+- Para agregar un tema, se define el set completo de tokens y se agrega a `THEMES` en `app/features/theme/data/themes.ts`. Para agregar un token, se define en todos los temas. Los pares texto/fondo deben tener un contraste de al menos 4.5:1.
 - El tema activo se aplica en `<html data-theme>`, se guarda en `profiles.theme` (Supabase) y se cachea en localStorage para aplicarlo antes del primer render.
 
 # Auth y roles

@@ -2,5 +2,25 @@
   "app": {
     "name": "Valen",
     "welcome": "Bienvenido"
+  },
+  "theme": {
+    "label": "Tema",
+    "names": {
+      "light": "Claro",
+      "dark": "Oscuro",
+      "sand": "Arena"
+    }
+  },
+  "preview": {
+    "description": "Vista previa de los tokens del tema activo.",
+    "card": "Tarjeta",
+    "cardBody": "Texto secundario sobre una superficie de tarjeta.",
+    "primary": "Principal",
+    "secondary": "Secundario",
+    "outline": "Contorno",
+    "destructive": "Eliminar",
+    "success": "Completado",
+    "warning": "Pendiente",
+    "input": "Escribe algo…"
   }
 }

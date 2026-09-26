@@ -16,11 +16,12 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 - [x] ~~Primer commit~~
 
 ## Fase 1 — Sistema de temas
-- [ ] Definir el set de tokens semánticos (background, foreground, primary, muted, border, destructive…)
-- [ ] Crear `app/assets/css/themes.css` con un tema por defecto y exponerlo con `@theme inline`
-- [ ] Diseñar 2–3 temas predefinidos adicionales (nombres y colores)
-- [ ] Aplicar el tema en `<html data-theme>` antes del primer render (caché en localStorage)
-- [ ] Store de tema en Pinia
+- [x] ~~Definir el set de tokens semánticos (background, foreground, primary, muted, border, destructive…)~~
+- [x] ~~Crear `app/assets/css/themes.css` con un tema por defecto y exponerlo con `@theme inline`~~
+- [x] ~~Diseñar los temas predefinidos: Claro, Oscuro y Arena~~
+- [x] ~~Aplicar el tema en `<html data-theme>` antes del primer render (caché en localStorage)~~
+- [x] ~~Store de tema en Pinia~~
+- [x] ~~Selector de tema y página temporal de vista previa~~
 - [ ] (Opcional) Regla de lint o script que detecte colores sueltos
 
 ## Fase 2 — Supabase: base y auth

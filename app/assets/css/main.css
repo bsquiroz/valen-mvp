@@ -1,4 +1,20 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "./themes.css";
 
-/* Los tokens de color y los temas se definen en la Fase 1 (themes.css) */
+/* `dark:` aplica en los temas oscuros (no depende del sistema operativo). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}

@@ -2,5 +2,25 @@
   "app": {
     "name": "Valen",
     "welcome": "Welcome"
+  },
+  "theme": {
+    "label": "Theme",
+    "names": {
+      "light": "Light",
+      "dark": "Dark",
+      "sand": "Sand"
+    }
+  },
+  "preview": {
+    "description": "Preview of the active theme tokens.",
+    "card": "Card",
+    "cardBody": "Secondary text on a card surface.",
+    "primary": "Primary",
+    "secondary": "Secondary",
+    "outline": "Outline",
+    "destructive": "Delete",
+    "success": "Completed",
+    "warning": "Pending",
+    "input": "Type something…"
   }
 }

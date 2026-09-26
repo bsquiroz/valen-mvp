@@ -1,4 +1,5 @@
 import tailwindcss from '@tailwindcss/vite'
+import { themeBootstrapScript } from './app/features/theme/data/themes'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -12,6 +13,12 @@ export default defineNuxtConfig({
   ],
   ssr: false,
   devtools: { enabled: true },
+
+  app: {
+    head: {
+      script: [{ innerHTML: themeBootstrapScript, tagPosition: 'head' }],
+    },
+  },
 
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2025-07-15',
