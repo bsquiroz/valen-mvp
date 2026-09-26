@@ -135,10 +135,12 @@
       "sessions": "Live sessions",
       "users": "Users",
       "diagnostic": "Assessment",
+      "plan": "Personal plan",
       "admins": "Administrators"
     },
     "sectionDescriptions": {
       "diagnostic": "Review the questions and try the form.",
+      "plan": "Manage the steps assigned from the assessment.",
       "admins": "Create and remove admin accounts."
     },
     "diagnostic": {
@@ -147,7 +149,7 @@
       "tryIt": "Try assessment",
       "points": "{count} pts",
       "changesNote": "Changes apply to future assessments; past results aren't recalculated.",
-      "actionError": "The change couldn't be saved and was undone. Please try again.",
+      "actionError": "The change couldn't be applied.",
       "question": "Question",
       "option": "Answer",
       "options": "Answers",
@@ -169,15 +171,47 @@
       "maxOptionsHint": "Up to 6 answers per question",
       "confirmDeleteQuestion": {
         "title": "Delete this question?",
-        "description": "The question and its {count} answers will be deleted. What users answered to it will also be deleted; scores already calculated are kept."
+        "description": "When you save, the question and its {count} answers will be deleted. What users answered to it will also be deleted; scores already calculated are kept."
       },
       "confirmDeleteOption": {
         "title": "Delete this answer?",
-        "description": "“{option}” will be deleted. If any user chose it, it will be removed from their history; scores already calculated are kept."
+        "description": "When you save, “{option}” will be deleted. If any user chose it, it will be removed from their history; scores already calculated are kept."
       },
       "moveQuestion": "Move question {number} of {total}. Use the up and down arrows.",
       "moveHint": "Drag to reorder (or use ↑ ↓)",
-      "saving": "Saving…"
+      "unsaved": "1 question with unsaved changes | {count} questions with unsaved changes",
+      "saveError": "The changes couldn't be saved. Please try again; your changes are still here.",
+      "saveBeforeTrying": "Save your changes to try them in the preview."
+    },
+    "plan": {
+      "description": "Steps for each pillar and which assessment level they are assigned to.",
+      "count": "{active} of {total} steps active",
+      "changesNote": "New steps, levels and deactivations apply to plans generated from now on: nobody loses the progress they already have. Texts update for everyone.",
+      "loadError": "We couldn't load the plan steps. Please try again.",
+      "inUseError": "This step is already in user plans: deactivate it instead of deleting it.",
+      "stepTitle": "Title",
+      "stepDescription": "Description (optional)",
+      "levels": "Levels",
+      "levelsHint": "The step is assigned to people who get these levels in the pillar.",
+      "editStep": "Edit step",
+      "deleteStep": "Delete step",
+      "deactivate": "Deactivate step",
+      "activate": "Activate step",
+      "inactive": "Inactive",
+      "usage": "In no plans | In 1 plan | In {count} plans",
+      "deleteDisabledHint": "Already in user plans: deactivate it instead.",
+      "addStepTo": "Add step to {pillar}",
+      "newStepIn": "New step in {pillar}",
+      "createStep": "Create step",
+      "moveStep": "Move step {number} of {total}. Use the up and down arrows.",
+      "confirmDelete": {
+        "title": "Delete this step?",
+        "description": "When you save, it will be deleted. It isn't in any plan, so nobody loses it."
+      },
+      "errors": {
+        "levelsRequired": "Choose at least one level."
+      },
+      "unsaved": "1 step with unsaved changes | {count} steps with unsaved changes"
     },
     "errors": {
       "textRequired": "Fill in this field.",
@@ -194,7 +228,14 @@
     "next": "Next",
     "save": "Save",
     "cancel": "Cancel",
-    "delete": "Delete"
+    "delete": "Delete",
+    "unsaved": {
+      "label": "Unsaved changes",
+      "discard": "Discard",
+      "saving": "Saving…",
+      "save": "Save changes",
+      "confirmLeave": "You have unsaved changes. Leave without saving?"
+    }
   },
   "pillars": {
     "psychology": "Psychology",
@@ -260,13 +301,18 @@
     "noSteps": "No steps for this pillar yet.",
     "noDiagnostic": "Complete the assessment to generate your personal plan.",
     "loadError": "We couldn't load your plan. Check your connection and try again.",
-    "toggleError": "The change couldn't be saved. Please try again.",
     "updateNote": "You can retake the assessment one more time: your plan will update and what you've completed is kept.",
     "next": {
       "title": "Your next step",
       "doneTitle": "Plan completed!",
       "doneDescription": "You've completed every step in your plan. Great work!",
       "open": "See my plan"
+    },
+    "unsaved": {
+      "message": "You have 1 unsaved change | You have {count} unsaved changes",
+      "save": "Save progress",
+      "error": "We couldn't save your progress. Please try again; your changes are still here.",
+      "confirmLeave": "You have unsaved progress. Leave without saving?"
     }
   },
   "admins": {

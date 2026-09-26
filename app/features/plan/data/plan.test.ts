@@ -1,6 +1,17 @@
 import { describe, expect, it } from 'vitest'
 import type { PlanStep } from './plan'
-import { mapPlanSteps, nextStep, pillarsByPriority, progressOf, setStepCompleted, stepsByPillar } from './plan'
+import {
+  applyDraft,
+  applySavedProgress,
+  mapPlanSteps,
+  mapSavedProgress,
+  nextStep,
+  pillarsByPriority,
+  progressOf,
+  stepsByPillar,
+  toggleInDraft,
+  toProgressPayload,
+} from './plan'
 
 const text = (value: string) => ({ es: value, en: value })
 
@@ -56,9 +67,32 @@ describe('selectors', () => {
     expect(nextStep(steps, ['relationships', 'finance', 'psychology', 'fitness'])?.templateId).toBe('r1')
     expect(nextStep(steps.map(s => ({ ...s, completedAt: 'x' })), ['finance'])).toBeNull()
   })
+})
 
-  it('marks a step as completed or pending', () => {
-    expect(setStepCompleted(steps, 'f2', 'now').find(s => s.templateId === 'f2')?.completedAt).toBe('now')
-    expect(setStepCompleted(steps, 'f1', null).find(s => s.templateId === 'f1')?.completedAt).toBeNull()
+describe('draft', () => {
+  it('records changes and drops them when back to the saved state', () => {
+    const draft = toggleInDraft(steps, {}, 'f2', true)
+    expect(draft).toEqual({ f2: true })
+    expect(toggleInDraft(steps, draft, 'f2', false)).toEqual({})
+    expect(toggleInDraft(steps, {}, 'f1', false)).toEqual({ f1: false })
+    expect(toggleInDraft(steps, {}, 'missing', true)).toEqual({})
+  })
+
+  it('applies the draft for display and progress', () => {
+    const shown = applyDraft(steps, { f2: true, f1: false }, 'now')
+    expect(shown.find(s => s.templateId === 'f2')?.completedAt).toBe('now')
+    expect(shown.find(s => s.templateId === 'f1')?.completedAt).toBeNull()
+    expect(progressOf(shown).done).toBe(2)
+  })
+
+  it('builds a single payload and applies the saved rows', () => {
+    expect(toProgressPayload({ f2: true, f1: false })).toEqual([
+      { template_id: 'f2', completed: true },
+      { template_id: 'f1', completed: false },
+    ])
+    const saved = mapSavedProgress([{ template_id: 'f2', completed_at: '2026-09-27T00:00:00Z' }])
+    expect(saved).toEqual([{ templateId: 'f2', completedAt: '2026-09-27T00:00:00Z' }])
+    expect(applySavedProgress(steps, saved).find(s => s.templateId === 'f2')?.completedAt).toBe('2026-09-27T00:00:00Z')
+    expect(() => mapSavedProgress([{ template_id: 'f2' }])).toThrow()
   })
 })

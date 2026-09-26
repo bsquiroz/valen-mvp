@@ -30,7 +30,9 @@ export interface DiagnosticResult {
   scores: PillarScores
 }
 
-export type ScoreLevel = 'low' | 'medium' | 'high'
+// Mismos valores que el enum public.score_level
+export const SCORE_LEVELS = ['low', 'medium', 'high'] as const
+export type ScoreLevel = typeof SCORE_LEVELS[number]
 
 // Mappers
 

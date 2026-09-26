@@ -15,13 +15,35 @@ import NewQuestionForm from './NewQuestionForm.vue'
 import QuestionItem from './QuestionItem.vue'
 
 const editor = useDiagnosticEditor()
-const { questions, status, saving } = editor
+const { questions, status, saving, changeCount, hasChanges } = editor
 const groups = computed(() => questionsByPillar(questions.value))
+const { t } = useI18n()
 
 const activeEditor = ref<string | null>(null)
 const actionError = ref(false)
+const saveError = ref(false)
 
-async function run(operation: () => Promise<unknown>): Promise<boolean> {
+// Los cambios quedan en un borrador local; "Guardar cambios" hace una sola escritura.
+async function save() {
+  saveError.value = false
+  try {
+    await editor.save()
+  }
+  catch (error) {
+    console.error(error)
+    saveError.value = true
+  }
+}
+
+function discard() {
+  saveError.value = false
+  activeEditor.value = null
+  editor.discard()
+}
+
+useUnsavedChangesGuard({ hasChanges: () => hasChanges.value, discard: editor.discard })
+
+async function run(operation: () => unknown): Promise<boolean> {
   actionError.value = false
   try {
     await operation()
@@ -44,26 +66,39 @@ onMounted(editor.load)
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
+  <div
+    class="flex flex-col gap-4"
+    :class="{ 'pb-24': hasChanges }"
+  >
     <div class="flex flex-wrap items-center justify-between gap-2">
       <div class="flex flex-col gap-0.5 text-sm text-muted-foreground">
         <p class="font-medium text-foreground">
           {{ $t('admin.diagnostic.count', { count: questions.length }) }}
         </p>
         <p>{{ $t('admin.diagnostic.changesNote') }}</p>
-        <p
-          class="text-xs"
-          aria-live="polite"
-        >
-          {{ saving ? $t('admin.diagnostic.saving') : '' }}
-        </p>
       </div>
-      <Button as-child>
-        <NuxtLink to="/admin/diagnostic/preview">
+      <!-- La vista previa usa lo guardado: con cambios pendientes se guarda primero -->
+      <span
+        :title="hasChanges ? $t('admin.diagnostic.saveBeforeTrying') : undefined"
+        class="inline-flex"
+      >
+        <Button
+          v-if="hasChanges"
+          disabled
+        >
           <FlaskConical />
           {{ $t('admin.diagnostic.tryIt') }}
-        </NuxtLink>
-      </Button>
+        </Button>
+        <Button
+          v-else
+          as-child
+        >
+          <NuxtLink to="/admin/diagnostic/preview">
+            <FlaskConical />
+            {{ $t('admin.diagnostic.tryIt') }}
+          </NuxtLink>
+        </Button>
+      </span>
     </div>
 
     <Alert
@@ -142,5 +177,15 @@ onMounted(editor.load)
         </CardContent>
       </Card>
     </template>
+
+    <UnsavedChangesBar
+      v-if="hasChanges"
+      :message="t('admin.diagnostic.unsaved', { count: changeCount }, changeCount)"
+      :save-label="t('common.unsaved.save')"
+      :error="saveError ? t('admin.diagnostic.saveError') : null"
+      :saving="saving"
+      @save="save"
+      @discard="discard"
+    />
   </div>
 </template>

@@ -1,6 +1,6 @@
 import { getSupabase } from '@/lib/supabase'
-import type { PlanStep } from '../data/plan'
-import { mapPlanSteps } from '../data/plan'
+import type { PlanDraft, PlanStep, SavedProgress } from '../data/plan'
+import { mapPlanSteps, mapSavedProgress, toProgressPayload } from '../data/plan'
 
 export async function fetchPlanSteps(userId: string): Promise<PlanStep[]> {
   const { data, error } = await getSupabase()
@@ -11,16 +11,11 @@ export async function fetchPlanSteps(userId: string): Promise<PlanStep[]> {
   return mapPlanSteps(data)
 }
 
-export async function setPlanStepCompleted(userId: string, templateId: string, completed: boolean): Promise<string | null> {
-  const completedAt = completed ? new Date().toISOString() : null
-  const { data, error } = await getSupabase()
-    .from('plan_steps')
-    .update({ completed_at: completedAt })
-    .eq('user_id', userId)
-    .eq('template_id', templateId)
-    .select('completed_at')
+// Guarda todos los cambios del borrador en una sola llamada (todo o nada; las fechas las pone la base).
+export async function savePlanProgress(draft: PlanDraft): Promise<SavedProgress[]> {
+  const { data, error } = await getSupabase().rpc('save_plan_progress', {
+    p_changes: toProgressPayload(draft),
+  })
   if (error) throw error
-  // RLS filtra sin error: 0 filas = no se aplicó
-  if (!data?.length) throw new Error('No rows affected')
-  return data[0]!.completed_at
+  return mapSavedProgress(data)
 }

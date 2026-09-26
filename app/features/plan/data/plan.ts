@@ -77,6 +77,47 @@ export function nextStep(steps: PlanStep[], priority: Pillar[]): PlanStep | null
   return null
 }
 
-export function setStepCompleted(steps: PlanStep[], templateId: string, completedAt: string | null): PlanStep[] {
-  return steps.map(step => (step.templateId === templateId ? { ...step, completedAt } : step))
+// Avance sin guardar: templateId → completado o no. Se guarda todo junto con "Guardar avance"
+// (una sola llamada a la base en lugar de una por clic).
+export type PlanDraft = Record<string, boolean>
+
+// Marca o desmarca en el borrador. Volver al estado guardado quita el cambio.
+export function toggleInDraft(steps: PlanStep[], draft: PlanDraft, templateId: string, completed: boolean): PlanDraft {
+  const saved = steps.find(step => step.templateId === templateId)
+  if (!saved) return draft
+  const { [templateId]: _previous, ...rest } = draft
+  return !!saved.completedAt === completed ? rest : { ...rest, [templateId]: completed }
+}
+
+// Pasos tal como se ven con el borrador aplicado. `now` es la fecha provisional de los recién marcados.
+export function applyDraft(steps: PlanStep[], draft: PlanDraft, now: string): PlanStep[] {
+  return steps.map((step) => {
+    const completed = draft[step.templateId]
+    if (completed === undefined) return step
+    return { ...step, completedAt: completed ? step.completedAt ?? now : null }
+  })
+}
+
+export function toProgressPayload(draft: PlanDraft) {
+  return Object.entries(draft).map(([templateId, completed]) => ({ template_id: templateId, completed }))
+}
+
+const savedProgressRowSchema = z.object({
+  template_id: z.string(),
+  completed_at: z.string().nullable(),
+})
+
+export interface SavedProgress {
+  templateId: string
+  completedAt: string | null
+}
+
+export function mapSavedProgress(rows: unknown): SavedProgress[] {
+  return z.array(savedProgressRowSchema).parse(rows).map(row => ({ templateId: row.template_id, completedAt: row.completed_at }))
+}
+
+// Aplica lo que devolvió save_plan_progress (las fechas reales las pone la base).
+export function applySavedProgress(steps: PlanStep[], saved: SavedProgress[]): PlanStep[] {
+  const byId = new Map(saved.map(row => [row.templateId, row.completedAt]))
+  return steps.map(step => (byId.has(step.templateId) ? { ...step, completedAt: byId.get(step.templateId)! } : step))
 }

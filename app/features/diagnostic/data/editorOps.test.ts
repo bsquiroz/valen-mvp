@@ -1,15 +1,18 @@
 import { describe, expect, it } from 'vitest'
+import { tempId } from '@/lib/tempId'
 import { emptyQuestionForm, questionFormSchema } from './adminForms'
 import type { DiagnosticQuestion } from './diagnostic'
 import {
   addOption,
   addQuestion,
   canRemoveOption,
+  countDiagnosticChanges,
   moveQuestion,
   nextQuestionPosition,
   removeOption,
   removeQuestion,
   reorderQuestions,
+  toDiagnosticPayload,
   updateOption,
   updateQuestionPrompt,
 } from './editorOps'
@@ -109,5 +112,23 @@ describe('ordering', () => {
   it('clamps moves at the edges', () => {
     expect(order(moveQuestion(three, 'q1', -1))).toEqual(['q1:1', 'q2:4', 'q3:9'])
     expect(order(moveQuestion(three, 'q3', 5))).toEqual(['q1:1', 'q2:4', 'q3:9'])
+  })
+})
+
+describe('draft', () => {
+  it('builds the full payload ordered by pillar and position, new items without id', () => {
+    const draft = addQuestion(base, 'fitness', { prompt: text('n'), options: [{ label: text('a'), score: 0 }, { label: text('b'), score: 3 }] }, tempId)
+    const payload = toDiagnosticPayload(reorderQuestions(draft, 'finance', ['q2', 'q1']))
+    expect(payload.map(q => q.id)).toEqual(['q2', 'q1', null])
+    expect(payload[2]?.options.map(o => o.id)).toEqual([null, null])
+    expect(payload[0]?.options[0]).toEqual({ id: 'o3', label: text('a'), score: 0 })
+  })
+
+  it('counts questions with changes', () => {
+    expect(countDiagnosticChanges(base, base)).toBe(0)
+    expect(countDiagnosticChanges(base, updateQuestionPrompt(base, 'q1', text('x')))).toBe(1)
+    expect(countDiagnosticChanges(base, updateOption(base, 'o5', { score: 2 }))).toBe(1)
+    expect(countDiagnosticChanges(base, removeQuestion(base, 'q1'))).toBe(1)
+    expect(countDiagnosticChanges(base, reorderQuestions(base, 'finance', ['q2', 'q1']))).toBe(2)
   })
 })

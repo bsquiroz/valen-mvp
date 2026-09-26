@@ -1,25 +1,29 @@
 import type { LocalizedText } from '@/lib/localizedText'
 import type { Pillar } from '@/lib/pillars'
-import * as api from '../api/adminDiagnostic'
+import { tempId } from '@/lib/tempId'
+import { saveDiagnostic } from '../api/adminDiagnostic'
 import { fetchQuestions } from '../api/diagnostic'
 import type { OptionForm, QuestionForm } from '../data/adminForms'
 import type { DiagnosticQuestion } from '../data/diagnostic'
 import * as ops from '../data/editorOps'
 
 // Estado y operaciones del editor de preguntas del admin.
-// Cada operación aplica el cambio en local al instante (optimista), lo guarda en Supabase y
-// recarga las preguntas para quedar con los datos reales. Si falla, se revierte y se relanza el error.
+// Las operaciones solo cambian un borrador local; `save` lo guarda todo en una sola llamada
+// (cuida las escrituras en la base) y `discard` vuelve a lo guardado.
 export function useDiagnosticEditor() {
+  const saved = ref<DiagnosticQuestion[]>([])
   const questions = ref<DiagnosticQuestion[]>([])
   const status = ref<'loading' | 'error' | 'ready'>('loading')
   const saving = ref(false)
 
-  const tempId = () => `temp-${crypto.randomUUID()}`
+  const changeCount = computed(() => ops.countDiagnosticChanges(saved.value, questions.value))
+  const hasChanges = computed(() => changeCount.value > 0)
 
   async function load() {
     status.value = 'loading'
     try {
-      questions.value = await fetchQuestions({ withScores: true })
+      saved.value = await fetchQuestions({ withScores: true })
+      questions.value = saved.value
       status.value = 'ready'
     }
     catch {
@@ -27,79 +31,65 @@ export function useDiagnosticEditor() {
     }
   }
 
-  async function mutate(local: (current: DiagnosticQuestion[]) => DiagnosticQuestion[], remote: () => Promise<unknown>) {
-    const previous = questions.value
-    questions.value = local(previous)
+  function edit(change: (current: DiagnosticQuestion[]) => DiagnosticQuestion[]) {
+    if (saving.value) return
+    questions.value = change(questions.value)
+  }
+
+  // Si falla, el borrador se conserva para reintentar.
+  async function save() {
+    if (!hasChanges.value || saving.value) return
     saving.value = true
     try {
-      await remote()
-    }
-    catch (error) {
-      questions.value = previous
-      throw error
+      await saveDiagnostic(questions.value)
+      saved.value = await fetchQuestions({ withScores: true })
+      questions.value = saved.value
     }
     finally {
       saving.value = false
     }
-    questions.value = await fetchQuestions({ withScores: true })
   }
 
-  const createQuestion = (pillar: Pillar, form: QuestionForm) => mutate(
-    current => ops.addQuestion(current, pillar, form, tempId),
-    () => api.createQuestion(pillar, form),
-  )
-
-  const updateQuestionPrompt = (questionId: string, prompt: LocalizedText) => mutate(
-    current => ops.updateQuestionPrompt(current, questionId, prompt),
-    () => api.updateQuestionPrompt(questionId, prompt),
-  )
-
-  const deleteQuestion = (questionId: string) => mutate(
-    current => ops.removeQuestion(current, questionId),
-    () => api.deleteQuestion(questionId),
-  )
-
-  const reorderQuestions = (pillar: Pillar, orderedIds: string[]) => mutate(
-    current => ops.reorderQuestions(current, pillar, orderedIds),
-    () => api.reorderQuestions(pillar, orderedIds),
-  )
-
-  async function moveQuestion(questionId: string, delta: number) {
-    const moved = ops.moveQuestion(questions.value, questionId, delta)
-    if (moved === questions.value) return
-    const question = moved.find(q => q.id === questionId)!
-    const orderedIds = moved
-      .filter(q => q.pillar === question.pillar)
-      .sort((a, b) => a.position - b.position)
-      .map(q => q.id)
-    await reorderQuestions(question.pillar, orderedIds)
+  function discard() {
+    questions.value = saved.value
   }
 
-  const addOption = (questionId: string, form: OptionForm) => mutate(
-    current => ops.addOption(current, questionId, form, tempId),
-    () => api.addOption(questionId, form),
-  )
+  const createQuestion = (pillar: Pillar, form: QuestionForm) =>
+    edit(current => ops.addQuestion(current, pillar, form, tempId))
 
-  const updateOptionLabel = (optionId: string, label: LocalizedText) => mutate(
-    current => ops.updateOption(current, optionId, { label }),
-    () => api.updateOption(optionId, { label }),
-  )
+  const updateQuestionPrompt = (questionId: string, prompt: LocalizedText) =>
+    edit(current => ops.updateQuestionPrompt(current, questionId, prompt))
 
-  const updateOptionScore = (optionId: string, score: number) => mutate(
-    current => ops.updateOption(current, optionId, { score }),
-    () => api.updateOption(optionId, { score }),
-  )
+  const deleteQuestion = (questionId: string) =>
+    edit(current => ops.removeQuestion(current, questionId))
 
-  const deleteOption = (optionId: string) => mutate(
-    current => ops.removeOption(current, optionId),
-    () => api.deleteOption(optionId),
-  )
+  const reorderQuestions = (pillar: Pillar, orderedIds: string[]) =>
+    edit(current => ops.reorderQuestions(current, pillar, orderedIds))
+
+  const moveQuestion = (questionId: string, delta: number) =>
+    edit(current => ops.moveQuestion(current, questionId, delta))
+
+  const addOption = (questionId: string, form: OptionForm) =>
+    edit(current => ops.addOption(current, questionId, form, tempId))
+
+  const updateOptionLabel = (optionId: string, label: LocalizedText) =>
+    edit(current => ops.updateOption(current, optionId, { label }))
+
+  const updateOptionScore = (optionId: string, score: number) =>
+    edit(current => ops.updateOption(current, optionId, { score }))
+
+  const deleteOption = (optionId: string) =>
+    edit(current => ops.removeOption(current, optionId))
 
   return {
     questions,
     status,
     saving,
+    changeCount,
+    hasChanges,
     load,
+    save,
+    discard,
     createQuestion,
     updateQuestionPrompt,
     deleteQuestion,

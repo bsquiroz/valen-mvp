@@ -263,29 +263,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      admin_add_diagnostic_option: {
-        Args: { p_label: Json; p_question_id: string; p_score: number }
-        Returns: string
+      admin_plan_step_usage: {
+        Args: never
+        Returns: {
+          template_id: string
+          users: number
+        }[]
       }
-      admin_create_diagnostic_question: {
-        Args: {
-          p_options: Json
-          p_pillar: Database["public"]["Enums"]["pillar"]
-          p_prompt: Json
-        }
-        Returns: string
-      }
-      admin_delete_diagnostic_option: {
-        Args: { p_option_id: string }
-        Returns: undefined
-      }
-      admin_reorder_diagnostic_questions: {
-        Args: {
-          p_ids: string[]
-          p_pillar: Database["public"]["Enums"]["pillar"]
-        }
-        Returns: undefined
-      }
+      admin_save_diagnostic: { Args: { p_questions: Json }; Returns: undefined }
+      admin_save_plan_steps: { Args: { p_steps: Json }; Returns: undefined }
       complete_diagnostic: { Args: { p_answers: Json }; Returns: string }
       compute_diagnostic_scores: {
         Args: { p_answers: Json }
@@ -302,6 +288,10 @@ export type Database = {
       is_localized_text: { Args: { value: Json }; Returns: boolean }
       is_super_admin: { Args: never; Returns: boolean }
       is_valid_diagnostic_option: { Args: { value: Json }; Returns: boolean }
+      is_valid_plan_step_levels: {
+        Args: { p_levels: Database["public"]["Enums"]["score_level"][] }
+        Returns: boolean
+      }
       preview_diagnostic: {
         Args: { p_answers: Json }
         Returns: {
@@ -312,6 +302,13 @@ export type Database = {
       rebuild_plan: {
         Args: { p_attempt_id: string; p_user_id: string }
         Returns: undefined
+      }
+      save_plan_progress: {
+        Args: { p_changes: Json }
+        Returns: {
+          completed_at: string
+          template_id: string
+        }[]
       }
       score_level: {
         Args: { p_score: number }

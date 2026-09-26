@@ -13,29 +13,45 @@ import { usePlanData } from './usePlanData'
 const planStore = usePlanStore()
 const profileStore = useProfileStore()
 const { status, latest, priority, groups, progress, load } = usePlanData()
+const { t } = useI18n()
 
-const toggleError = ref(false)
-const pending = ref(new Set<string>())
+const saveError = ref(false)
 
-async function toggle(templateId: string, completed: boolean) {
-  toggleError.value = false
-  pending.value.add(templateId)
+// Marcar pasos solo cambia el borrador local; "Guardar avance" hace una sola escritura.
+function toggle(templateId: string, completed: boolean) {
+  saveError.value = false
+  planStore.toggleStep(templateId, completed)
+}
+
+async function save() {
+  saveError.value = false
   try {
-    await planStore.toggleStep(templateId, completed)
+    await planStore.saveProgress()
   }
   catch {
-    toggleError.value = true
-  }
-  finally {
-    pending.value.delete(templateId)
+    saveError.value = true
   }
 }
+
+function discard() {
+  saveError.value = false
+  planStore.discardChanges()
+}
+
+useUnsavedChangesGuard({
+  hasChanges: () => planStore.hasChanges,
+  discard: () => planStore.discardChanges(),
+  confirmKey: 'plan.unsaved.confirmLeave',
+})
 
 onMounted(load)
 </script>
 
 <template>
-  <div class="mx-auto flex max-w-2xl flex-col gap-4">
+  <div
+    class="mx-auto flex max-w-2xl flex-col gap-4"
+    :class="{ 'pb-24': planStore.hasChanges }"
+  >
     <PageHeader
       :title="$t('plan.title')"
       :description="$t('plan.description')"
@@ -86,13 +102,6 @@ onMounted(load)
         />
       </div>
 
-      <Alert
-        v-if="toggleError"
-        variant="destructive"
-      >
-        <AlertDescription>{{ $t('plan.toggleError') }}</AlertDescription>
-      </Alert>
-
       <Card
         v-for="(pillar, index) in priority"
         :key="pillar"
@@ -123,7 +132,7 @@ onMounted(load)
               v-for="step in groups[pillar]"
               :key="step.templateId"
               :step="step"
-              :disabled="pending.has(step.templateId)"
+              :disabled="planStore.saving"
               @toggle="toggle(step.templateId, $event)"
             />
           </ul>
@@ -150,5 +159,16 @@ onMounted(load)
         </NuxtLink>
       </p>
     </template>
+
+    <!-- Avance sin guardar: una sola escritura para todos los pasos marcados -->
+    <UnsavedChangesBar
+      v-if="planStore.hasChanges"
+      :message="t('plan.unsaved.message', { count: planStore.changeCount }, planStore.changeCount)"
+      :save-label="t('plan.unsaved.save')"
+      :error="saveError ? t('plan.unsaved.error') : null"
+      :saving="planStore.saving"
+      @save="save"
+      @discard="discard"
+    />
   </div>
 </template>

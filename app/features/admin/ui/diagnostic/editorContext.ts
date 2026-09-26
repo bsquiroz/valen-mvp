@@ -7,7 +7,7 @@ export interface EditorContext {
   editor: DiagnosticEditor
   activeEditor: Ref<string | null>
   // Ejecuta una operación del editor y muestra el error si falla. Devuelve si tuvo éxito.
-  run: (operation: () => Promise<unknown>) => Promise<boolean>
+  run: (operation: () => unknown) => Promise<boolean>
 }
 
 export const editorContextKey: InjectionKey<EditorContext> = Symbol('diagnostic-editor')

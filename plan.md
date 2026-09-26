@@ -45,7 +45,7 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 - [x] ~~Layout y ruta base del panel de admin~~
 - [x] ~~Roles `admin` (editor de contenido) y `super_admin` (todo); RLS de datos de usuarios solo para el super admin~~
 - [x] ~~Super admin: crear, eliminar y cambiar la contraseña de admins (Edge Function `admin-users`)~~
-- [ ] Probar en el navegador la gestión de admins (crear → iniciar sesión como admin → cambiar contraseña → eliminar)
+- [x] ~~Probar en el navegador la gestión de admins (crear → iniciar sesión como admin → cambiar contraseña → eliminar)~~
 - [x] ~~Páginas placeholder para Mi plan, Cursos, Retos y Sesiones~~
 
 ## Fase 4 — Diagnóstico inicial
@@ -70,7 +70,11 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 - [x] ~~Generación automática al completar el diagnóstico; al repetirlo se conserva lo completado y se recalcula lo pendiente~~
 - [x] ~~Contenido inicial: 5 pasos por pilar con los niveles a los que aplican (es/en)~~
 - [x] ~~Vista del plan personal con progreso y pasos marcables; siguiente paso en el inicio~~
-- [ ] Admin: gestionar los pasos del plan (mismo patrón que el editor del diagnóstico)
+- [x] ~~Admin: gestionar los pasos del plan (mismo patrón que el editor del diagnóstico)~~
+- [x] ~~Cambiar la ruta no quita progreso: los pasos en uso no se borran, se desactivan; los planes existentes conservan sus pasos~~
+- [x] ~~Mi plan: marcar pasos en un borrador local y guardar todo con "Guardar avance" (una sola escritura, `save_plan_progress`)~~
+- [x] ~~Editores de admin (diagnóstico y plan) con borrador local y "Guardar cambios" en una sola escritura (`admin_save_diagnostic`, `admin_save_plan_steps`)~~
+- [ ] Probar en el navegador los editores de admin con borrador (editar varias cosas → Guardar cambios / Descartar)
 - [ ] Enlazar pasos a lecciones, retos y sesiones cuando existan (`kind` ya previsto)
 
 ## Fase 6 — Cursos pregrabados

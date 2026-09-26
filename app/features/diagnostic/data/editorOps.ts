@@ -1,3 +1,5 @@
+import { nextPosition } from '@/lib/pillarOrdering'
+import { isTempId } from '@/lib/tempId'
 import type { Pillar } from '@/lib/pillars'
 import type { LocalizedText } from '@/lib/localizedText'
 import { MIN_OPTIONS } from './adminForms'
@@ -8,7 +10,7 @@ import type { DiagnosticOption, DiagnosticQuestion } from './diagnostic'
 // Aplican las mismas reglas que la base para que el borrador local se comporte igual.
 
 export function nextQuestionPosition(questions: DiagnosticQuestion[], pillar: Pillar): number {
-  return Math.max(0, ...questions.filter(q => q.pillar === pillar).map(q => q.position)) + 1
+  return nextPosition(questions, pillar)
 }
 
 export function addQuestion(
@@ -68,33 +70,35 @@ export function removeOption(questions: DiagnosticQuestion[], optionId: string):
   })
 }
 
-// Reordena las preguntas de un pilar según `orderedIds` y renumera sus posiciones desde 1.
-// Los ids que falten conservan su orden relativo al final.
-export function reorderQuestions(questions: DiagnosticQuestion[], pillar: Pillar, orderedIds: string[]): DiagnosticQuestion[] {
-  const inPillar = questions
-    .filter(q => q.pillar === pillar)
-    .sort((a, b) => a.position - b.position)
-  const rank = (id: string) => {
-    const index = orderedIds.indexOf(id)
-    return index === -1 ? orderedIds.length : index
-  }
-  const ordered = [...inPillar].sort((a, b) => rank(a.id) - rank(b.id))
-  const positions = new Map(ordered.map((q, index) => [q.id, index + 1]))
-  return questions.map(q => (positions.has(q.id) ? { ...q, position: positions.get(q.id)! } : q))
+// Reordenar dentro del pilar (compartido con el editor del plan).
+export { moveInPillar as moveQuestion, reorderInPillar as reorderQuestions } from '@/lib/pillarOrdering'
+
+// Estado completo para admin_save_diagnostic: orden por pilar y posición; lo nuevo va con id null.
+export function toDiagnosticPayload(questions: DiagnosticQuestion[]) {
+  return [...questions]
+    .sort((a, b) => a.pillar.localeCompare(b.pillar) || a.position - b.position)
+    .map(question => ({
+      id: isTempId(question.id) ? null : question.id,
+      pillar: question.pillar,
+      prompt: question.prompt,
+      options: question.options.map(option => ({
+        id: isTempId(option.id) ? null : option.id,
+        label: option.label,
+        score: option.score ?? 0,
+      })),
+    }))
 }
 
-// Mueve una pregunta `delta` lugares dentro de su pilar (para mover con teclado).
-export function moveQuestion(questions: DiagnosticQuestion[], questionId: string, delta: number): DiagnosticQuestion[] {
-  const question = questions.find(q => q.id === questionId)
-  if (!question) return questions
-  const ids = questions
-    .filter(q => q.pillar === question.pillar)
-    .sort((a, b) => a.position - b.position)
-    .map(q => q.id)
-  const from = ids.indexOf(questionId)
-  const to = Math.min(ids.length - 1, Math.max(0, from + delta))
-  if (from === to) return questions
-  ids.splice(from, 1)
-  ids.splice(to, 0, questionId)
-  return reorderQuestions(questions, question.pillar, ids)
+// Preguntas con cambios respecto a lo guardado (nuevas, borradas, movidas o editadas).
+export function countDiagnosticChanges(saved: DiagnosticQuestion[], draft: DiagnosticQuestion[]): number {
+  const savedById = new Map(saved.map(question => [question.id, question]))
+  const draftIds = new Set(draft.map(question => question.id))
+  const removed = saved.filter(question => !draftIds.has(question.id)).length
+  const changed = draft.filter((question) => {
+    const before = savedById.get(question.id)
+    return !before
+      || before.position !== question.position
+      || JSON.stringify([before.prompt, before.options]) !== JSON.stringify([question.prompt, question.options])
+  }).length
+  return removed + changed
 }

@@ -19,7 +19,7 @@ Por features, en `app/features/<feature>/`:
 
 El store de Pinia de cada feature vive en `app/features/<feature>/store.ts`.
 
-El shell de la app (header, navegación inferior móvil, menú de usuario) está en `app/features/shell/`. La navegación principal se define en `shell/data/navigation.ts` (máximo 5 ítems por la barra móvil).
+El shell de la app (header, navegación inferior móvil, menú de usuario) está en `app/features/shell/`. La navegación principal se define en `shell/data/navigation.ts` (máximo 5 ítems por la barra móvil). El layout `focus` (sin navegación: solo el selector de idioma y cerrar sesión) se usa en el diagnóstico, que el usuario debe terminar.
 
 `app/pages/` solo compone las features. Lo compartido entre features va en `app/components/`, `app/composables/` y `app/lib/`.
 
@@ -51,6 +51,7 @@ El shell de la app (header, navegación inferior móvil, menú de usuario) está
 - Tras cada migración: `npm run db:push` y `npm run db:types` (regenera `app/types/database.types.ts`, no se edita a mano).
 - Supabase da permisos por defecto a `anon`/`authenticated` en tablas nuevas: cada migración hace `revoke all` y concede solo lo necesario.
 - Una sola política permisiva por tabla/rol/acción (combinar condiciones con `or`), y `auth.uid()`/`is_admin()` envueltos en `(select ...)`.
+- Editar contenido nunca le quita progreso a un usuario: un paso del plan que ya está en algún plan no se borra, se desactiva (`admin_save_plan_steps` lo impide), y los pasos nuevos, niveles y desactivaciones aplican solo a planes nuevos.
 - Cálculos que el usuario no debe poder falsear (puntajes, progreso) se hacen en funciones de la base, no en el cliente. Si además hay una vista previa de admin, ambas llaman a la misma función de cálculo (p. ej. `compute_diagnostic_scores`).
 - Contenido traducible en la base: columnas `jsonb` `{"es": "...", "en": "..."}` validadas con `is_localized_text()`; en el front, `localizedTextSchema` y `localize()` de `app/lib/localizedText.ts`.
 - Niveles por puntaje: `scoreLevel()` en el front y `public.score_level()` en la base usan los mismos umbrales (<40 bajo, <70 medio); si cambian, cambiar ambos.
@@ -58,6 +59,7 @@ El shell de la app (header, navegación inferior móvil, menú de usuario) está
 - Verificar después de migrar: `npx supabase db advisors --linked`. Para probar SQL contra el remoto sin dejar datos: `npx supabase db query --linked -f archivo.sql` dentro de `begin; … rollback;`.
 - Un `update`/`delete` que RLS filtra no da error, devuelve 0 filas: en `api/` usar `.select('id')` y tratar 0 filas como fallo.
 - Operaciones de admin que requieren atomicidad o reglas entre filas (crear con hijos, reordenar, mínimos) van en RPC `admin_*` con `is_admin()` al inicio.
+- Para cuidar las escrituras, las ediciones del usuario y del admin se hacen en un borrador local y se guardan con un botón ("Guardar cambios", "Guardar avance") en una sola llamada: una RPC que recibe el estado o los cambios completos, escribe solo lo que difiere y aplica todo o nada (`admin_save_diagnostic`, `admin_save_plan_steps`, `save_plan_progress`). Nada de una escritura por clic.
 - Funciones `security definer` siempre con `set search_path = ''`. Los permisos de columna se restringen con `grant update (...)`.
 
 # Idioma
@@ -68,6 +70,7 @@ El shell de la app (header, navegación inferior móvil, menú de usuario) está
 
 # Convenciones
 - Editores de contenido del admin: edición en línea con `LocalizedTextEditor` (ES/EN), `ScoreSelect`, `IconAction` (lápiz/papelera visibles al hover en desktop, siempre en móvil) y `ConfirmDelete` para borrar. Un solo editor abierto a la vez.
+- Borradores sin guardar: `UnsavedChangesBar` (barra con Guardar/Descartar) y `useUnsavedChangesGuard` (avisa antes de salir de la página o cerrar la pestaña). Lo creado en el borrador usa `tempId()` de `app/lib/tempId.ts` y se envía con id `null`.
 - Validar los formularios con Zod y parsear las respuestas de `api/` con los mappers de `data/`.
 - Diseño mobile-first.
 - Los tests de Vitest cubren como mínimo los mappers y selectors de `data/`.

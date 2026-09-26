@@ -135,10 +135,12 @@
       "sessions": "Sesiones en vivo",
       "users": "Usuarios",
       "diagnostic": "Diagnóstico",
+      "plan": "Plan personal",
       "admins": "Administradores"
     },
     "sectionDescriptions": {
       "diagnostic": "Revisa las preguntas y prueba el formulario.",
+      "plan": "Gestiona los pasos que se asignan según el diagnóstico.",
       "admins": "Crea y elimina las cuentas de los admins."
     },
     "diagnostic": {
@@ -147,7 +149,7 @@
       "tryIt": "Probar diagnóstico",
       "points": "{count} pts",
       "changesNote": "Los cambios aplican a los próximos diagnósticos; los resultados anteriores no se recalculan.",
-      "actionError": "No se pudo guardar el cambio; se deshizo. Inténtalo de nuevo.",
+      "actionError": "No se pudo aplicar el cambio.",
       "question": "Pregunta",
       "option": "Respuesta",
       "options": "Respuestas",
@@ -169,15 +171,47 @@
       "maxOptionsHint": "Máximo 6 respuestas por pregunta",
       "confirmDeleteQuestion": {
         "title": "¿Eliminar esta pregunta?",
-        "description": "Se eliminará la pregunta y sus {count} respuestas. Lo que los usuarios respondieron en ella también se borrará; los puntajes ya calculados se conservan."
+        "description": "Al guardar, se eliminará la pregunta y sus {count} respuestas. Lo que los usuarios respondieron en ella también se borrará; los puntajes ya calculados se conservan."
       },
       "confirmDeleteOption": {
         "title": "¿Eliminar esta respuesta?",
-        "description": "Se eliminará «{option}». Si algún usuario la eligió, esa respuesta se borrará de su historial; los puntajes ya calculados se conservan."
+        "description": "Al guardar, se eliminará «{option}». Si algún usuario la eligió, esa respuesta se borrará de su historial; los puntajes ya calculados se conservan."
       },
       "moveQuestion": "Mover pregunta {number} de {total}. Usa las flechas arriba y abajo.",
       "moveHint": "Arrastra para reordenar (o usa ↑ ↓)",
-      "saving": "Guardando…"
+      "unsaved": "1 pregunta con cambios sin guardar | {count} preguntas con cambios sin guardar",
+      "saveError": "No se pudieron guardar los cambios. Inténtalo de nuevo; tus cambios siguen aquí.",
+      "saveBeforeTrying": "Guarda los cambios para probarlos en la vista previa."
+    },
+    "plan": {
+      "description": "Pasos de cada pilar y a qué nivel del diagnóstico se asignan.",
+      "count": "{active} de {total} pasos activos",
+      "changesNote": "Los pasos nuevos, los niveles y las desactivaciones aplican a los planes que se generen desde ahora: nadie pierde el progreso que ya tiene. Los textos se actualizan para todos.",
+      "loadError": "No pudimos cargar los pasos del plan. Inténtalo de nuevo.",
+      "inUseError": "Este paso ya está en planes de usuarios: desactívalo en lugar de eliminarlo.",
+      "stepTitle": "Título",
+      "stepDescription": "Descripción (opcional)",
+      "levels": "Niveles",
+      "levelsHint": "El paso se asigna a quienes obtengan estos niveles en el pilar.",
+      "editStep": "Editar paso",
+      "deleteStep": "Eliminar paso",
+      "deactivate": "Desactivar paso",
+      "activate": "Activar paso",
+      "inactive": "Inactivo",
+      "usage": "En ningún plan | En 1 plan | En {count} planes",
+      "deleteDisabledHint": "Ya está en planes de usuarios: desactívalo en su lugar.",
+      "addStepTo": "Añadir paso a {pillar}",
+      "newStepIn": "Nuevo paso en {pillar}",
+      "createStep": "Crear paso",
+      "moveStep": "Mover paso {number} de {total}. Usa las flechas arriba y abajo.",
+      "confirmDelete": {
+        "title": "¿Eliminar este paso?",
+        "description": "Al guardar, se eliminará. No está en ningún plan, así que nadie lo pierde."
+      },
+      "errors": {
+        "levelsRequired": "Elige al menos un nivel."
+      },
+      "unsaved": "1 paso con cambios sin guardar | {count} pasos con cambios sin guardar"
     },
     "errors": {
       "textRequired": "Completa este campo.",
@@ -194,7 +228,14 @@
     "next": "Siguiente",
     "save": "Guardar",
     "cancel": "Cancelar",
-    "delete": "Eliminar"
+    "delete": "Eliminar",
+    "unsaved": {
+      "label": "Cambios sin guardar",
+      "discard": "Descartar",
+      "saving": "Guardando…",
+      "save": "Guardar cambios",
+      "confirmLeave": "Tienes cambios sin guardar. ¿Salir sin guardarlos?"
+    }
   },
   "pillars": {
     "psychology": "Psicología",
@@ -260,13 +301,18 @@
     "noSteps": "Sin pasos por ahora para este pilar.",
     "noDiagnostic": "Completa el diagnóstico para generar tu plan personal.",
     "loadError": "No pudimos cargar tu plan. Revisa tu conexión e inténtalo de nuevo.",
-    "toggleError": "No se pudo guardar el cambio. Inténtalo de nuevo.",
     "updateNote": "Puedes repetir el diagnóstico una vez más: tu plan se actualizará y lo que ya completaste se conserva.",
     "next": {
       "title": "Tu siguiente paso",
       "doneTitle": "¡Plan completado!",
       "doneDescription": "Completaste todos los pasos de tu plan. ¡Buen trabajo!",
       "open": "Ver mi plan"
+    },
+    "unsaved": {
+      "message": "Tienes 1 cambio sin guardar | Tienes {count} cambios sin guardar",
+      "save": "Guardar avance",
+      "error": "No pudimos guardar tu avance. Inténtalo de nuevo; tus cambios siguen aquí.",
+      "confirmLeave": "Tienes avance sin guardar. ¿Salir sin guardarlo?"
     }
   },
   "admins": {

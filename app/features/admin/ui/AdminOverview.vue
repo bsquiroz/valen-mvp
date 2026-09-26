@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BookOpen, ChevronRight, ClipboardList, ShieldCheck, Target, Users, Video } from '@lucide/vue'
+import { BookOpen, ChevronRight, ClipboardList, ListChecks, ShieldCheck, Target, Users, Video } from '@lucide/vue'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useProfileStore } from '@/features/profile/store'
 
@@ -7,6 +7,7 @@ import { useProfileStore } from '@/features/profile/store'
 // `superAdmin`: datos de usuarios y cuentas, solo para el super admin.
 const SECTIONS = [
   { key: 'diagnostic', icon: ClipboardList, to: '/admin/diagnostic' },
+  { key: 'plan', icon: ListChecks, to: '/admin/plan' },
   { key: 'courses', icon: BookOpen },
   { key: 'challenges', icon: Target },
   { key: 'sessions', icon: Video },
