@@ -8,7 +8,7 @@ import { useProfileStore } from '@/features/profile/store'
 const SECTIONS = [
   { key: 'diagnostic', icon: ClipboardList, to: '/admin/diagnostic' },
   { key: 'plan', icon: ListChecks, to: '/admin/plan' },
-  { key: 'courses', icon: BookOpen },
+  { key: 'courses', icon: BookOpen, to: '/admin/courses' },
   { key: 'challenges', icon: Target },
   { key: 'sessions', icon: Video },
   { key: 'users', icon: Users, superAdmin: true },

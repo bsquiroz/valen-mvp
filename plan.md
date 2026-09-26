@@ -74,15 +74,21 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 - [x] ~~Cambiar la ruta no quita progreso: los pasos en uso no se borran, se desactivan; los planes existentes conservan sus pasos~~
 - [x] ~~Mi plan: marcar pasos en un borrador local y guardar todo con "Guardar avance" (una sola escritura, `save_plan_progress`)~~
 - [x] ~~Editores de admin (diagnóstico y plan) con borrador local y "Guardar cambios" en una sola escritura (`admin_save_diagnostic`, `admin_save_plan_steps`)~~
-- [ ] Probar en el navegador los editores de admin con borrador (editar varias cosas → Guardar cambios / Descartar)
+- [x] ~~Probar en el navegador los editores de admin con borrador (editar varias cosas → Guardar cambios / Descartar)~~
 - [ ] Enlazar pasos a lecciones, retos y sesiones cuando existan (`kind` ya previsto)
 
 ## Fase 6 — Cursos pregrabados
-- [ ] **Decidir el hosting de video**
-- [ ] Modelo de datos: cursos → módulos → lecciones, por pilar
-- [ ] Catálogo de cursos y vista de lección con reproductor
-- [ ] Marcar lecciones como completadas
-- [ ] Admin: CRUD de cursos, módulos y lecciones
+- [x] ~~**Decidir el hosting de video**: Bunny Stream (red Volume, autenticación por token; los videos se suben en Bunny y en el admin se pega el ID)~~
+- [ ] Configurar la Video Library de Bunny (red Volume, token authentication, dominios permitidos) y subir videos de prueba
+- [x] ~~Modelo de datos: pilar → curso → lecciones (proveedor + ID de video) y progreso por usuario~~
+- [x] ~~Catálogo de cursos y vista de lección con reproductor (enlace firmado por la Edge Function `lesson-video`)~~
+- [x] ~~Marcar lecciones como completadas~~
+- [x] ~~Lecciones secuenciales: la siguiente se desbloquea al completar la actual (`lesson_is_unlocked` en la base y en `lesson-video`); completar es definitivo~~
+- [x] ~~Admin: cursos y lecciones con borrador y "Guardar cambios" (`admin_save_courses`); lecciones completadas no se borran, se desactivan~~
+- [x] ~~Formularios del admin: botón deshabilitado hasta completar lo obligatorio; descripción del curso obligatoria (textarea); duración de lecciones en min:seg~~
+- [x] ~~Vista de lección en grilla: mapa del curso (línea de tiempo con completadas, actual y bloqueadas) a la izquierda y video a la derecha; la misma línea de tiempo en la página del curso~~
+- [x] ~~Guardar `BUNNY_TOKEN_KEY` en los secrets de Supabase y probar la reproducción en el navegador~~
+- [ ] Probar en el navegador el catálogo, el avance de lecciones y el editor de cursos
 
 ## Fase 7 — Retos y ejercicios
 - [ ] Modelo de datos: retos por pilar/lección y su seguimiento

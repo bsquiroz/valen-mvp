@@ -3,6 +3,7 @@ import type { ScoreLevel } from '@/features/diagnostic/data/diagnostic'
 import { SCORE_LEVELS } from '@/features/diagnostic/data/diagnostic'
 import type { LocalizedText } from '@/lib/localizedText'
 import { localizedTextInputSchema, localizedTextSchema } from '@/lib/localizedText'
+import { EARLY_ISSUE } from '@/lib/forms'
 import { nextPosition } from '@/lib/pillarOrdering'
 import type { Pillar } from '@/lib/pillars'
 import { PILLARS } from '@/lib/pillars'
@@ -72,8 +73,8 @@ export const planStepFormSchema = z.object({
   levels: z.array(z.enum(SCORE_LEVELS)).min(1, { error: 'admin.plan.errors.levelsRequired' }),
 }).superRefine((form, ctx) => {
   const { es, en } = form.description
-  if (!es && en) ctx.addIssue({ code: 'custom', path: ['description', 'es'], message: 'admin.errors.textRequired' })
-  if (es && !en) ctx.addIssue({ code: 'custom', path: ['description', 'en'], message: 'admin.errors.textRequired' })
+  if (!es && en) ctx.addIssue({ code: 'custom', path: ['description', 'es'], message: 'admin.errors.textRequired', params: EARLY_ISSUE })
+  if (es && !en) ctx.addIssue({ code: 'custom', path: ['description', 'en'], message: 'admin.errors.textRequired', params: EARLY_ISSUE })
 }).transform(form => ({
   title: form.title,
   description: form.description.es ? form.description : null,

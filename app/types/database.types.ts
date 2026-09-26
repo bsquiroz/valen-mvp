@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      courses: {
+        Row: {
+          created_at: string
+          description: Json
+          id: string
+          is_active: boolean
+          pillar: Database["public"]["Enums"]["pillar"]
+          position: number
+          title: Json
+        }
+        Insert: {
+          created_at?: string
+          description: Json
+          id?: string
+          is_active?: boolean
+          pillar: Database["public"]["Enums"]["pillar"]
+          position: number
+          title: Json
+        }
+        Update: {
+          created_at?: string
+          description?: Json
+          id?: string
+          is_active?: boolean
+          pillar?: Database["public"]["Enums"]["pillar"]
+          position?: number
+          title?: Json
+        }
+        Relationships: []
+      }
       diagnostic_answers: {
         Row: {
           attempt_id: string
@@ -157,6 +187,79 @@ export type Database = {
           },
         ]
       }
+      lesson_progress: {
+        Row: {
+          completed_at: string
+          lesson_id: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string
+          lesson_id: string
+          user_id?: string
+        }
+        Update: {
+          completed_at?: string
+          lesson_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_progress_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lessons: {
+        Row: {
+          course_id: string
+          created_at: string
+          description: Json | null
+          duration_seconds: number | null
+          id: string
+          is_active: boolean
+          position: number
+          title: Json
+          video_id: string
+          video_provider: string
+        }
+        Insert: {
+          course_id: string
+          created_at?: string
+          description?: Json | null
+          duration_seconds?: number | null
+          id?: string
+          is_active?: boolean
+          position: number
+          title: Json
+          video_id: string
+          video_provider?: string
+        }
+        Update: {
+          course_id?: string
+          created_at?: string
+          description?: Json | null
+          duration_seconds?: number | null
+          id?: string
+          is_active?: boolean
+          position?: number
+          title?: Json
+          video_id?: string
+          video_provider?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lessons_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       plan_step_templates: {
         Row: {
           created_at: string
@@ -263,6 +366,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_lesson_usage: {
+        Args: never
+        Returns: {
+          lesson_id: string
+          users: number
+        }[]
+      }
       admin_plan_step_usage: {
         Args: never
         Returns: {
@@ -270,9 +380,11 @@ export type Database = {
           users: number
         }[]
       }
+      admin_save_courses: { Args: { p_courses: Json }; Returns: undefined }
       admin_save_diagnostic: { Args: { p_questions: Json }; Returns: undefined }
       admin_save_plan_steps: { Args: { p_steps: Json }; Returns: undefined }
       complete_diagnostic: { Args: { p_answers: Json }; Returns: string }
+      completed_lesson: { Args: { p_lesson_id: string }; Returns: boolean }
       compute_diagnostic_scores: {
         Args: { p_answers: Json }
         Returns: {
@@ -292,6 +404,8 @@ export type Database = {
         Args: { p_levels: Database["public"]["Enums"]["score_level"][] }
         Returns: boolean
       }
+      lesson_is_active: { Args: { p_lesson_id: string }; Returns: boolean }
+      lesson_is_unlocked: { Args: { p_lesson_id: string }; Returns: boolean }
       preview_diagnostic: {
         Args: { p_answers: Json }
         Returns: {
@@ -314,6 +428,7 @@ export type Database = {
         Args: { p_score: number }
         Returns: Database["public"]["Enums"]["score_level"]
       }
+      started_course: { Args: { p_course_id: string }; Returns: boolean }
       super_admin_list_admins: {
         Args: never
         Returns: {

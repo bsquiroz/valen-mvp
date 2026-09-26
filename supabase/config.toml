@@ -416,3 +416,6 @@ enabled = true
 
 [functions.admin-users]
 verify_jwt = true
+
+[functions.lesson-video]
+verify_jwt = true

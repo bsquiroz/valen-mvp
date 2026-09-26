@@ -141,6 +141,7 @@
     "sectionDescriptions": {
       "diagnostic": "Revisa las preguntas y prueba el formulario.",
       "plan": "Gestiona los pasos que se asignan según el diagnóstico.",
+      "courses": "Crea cursos por pilar y enlaza los videos de Bunny.",
       "admins": "Crea y elimina las cuentas de los admins."
     },
     "diagnostic": {
@@ -213,6 +214,59 @@
       },
       "unsaved": "1 paso con cambios sin guardar | {count} pasos con cambios sin guardar"
     },
+    "courses": {
+      "pageDescription": "Cursos de cada pilar y sus lecciones. Los videos se suben en Bunny y aquí se pega su ID.",
+      "count": "{courses} cursos · {lessons} lecciones",
+      "changesNote": "Una lección que algún usuario completó no se puede eliminar: desactívala. Quien ya la completó la sigue viendo.",
+      "loadError": "No pudimos cargar los cursos. Inténtalo de nuevo.",
+      "inUseError": "Hay lecciones que ya completaron usuarios: desactívalas en lugar de eliminarlas.",
+      "unsaved": "1 curso con cambios sin guardar | {count} cursos con cambios sin guardar",
+      "courseTitle": "Título del curso",
+      "lessonTitle": "Título de la lección",
+      "description": "Descripción (opcional)",
+      "videoId": "ID del video en Bunny",
+      "videoIdHint": "En Bunny: menú ⋯ del video → Copy Video ID.",
+      "duration": "Duración (min:seg, opcional)",
+      "addCourseTo": "Añadir curso a {pillar}",
+      "newCourseIn": "Nuevo curso en {pillar}",
+      "createCourse": "Crear curso",
+      "editCourse": "Editar curso",
+      "deleteCourse": "Eliminar curso",
+      "deactivateCourse": "Desactivar curso",
+      "activateCourse": "Activar curso",
+      "addLesson": "Añadir lección",
+      "newLesson": "Nueva lección",
+      "createLesson": "Crear lección",
+      "editLesson": "Editar lección",
+      "deleteLesson": "Eliminar lección",
+      "deactivateLesson": "Desactivar lección",
+      "activateLesson": "Activar lección",
+      "previewLesson": "Ver lección",
+      "previewUnsaved": "Guarda los cambios para ver la lección.",
+      "usage": "Nadie la completó | Completada por 1 usuario | Completada por {count} usuarios",
+      "deleteLessonDisabled": "Ya la completaron usuarios: desactívala en su lugar.",
+      "deleteCourseDisabled": "Tiene lecciones que ya completaron usuarios: desactívalo en su lugar.",
+      "moveCourse": "Mover curso {number} de {total}. Usa las flechas arriba y abajo.",
+      "moveLesson": "Mover lección {number} de {total}. Usa las flechas arriba y abajo.",
+      "noLessons": "Este curso todavía no tiene lecciones.",
+      "inactive": "Inactivo",
+      "confirmDeleteCourse": {
+        "title": "¿Eliminar este curso?",
+        "description": "Al guardar, se eliminará el curso y sus {count} lecciones. Nadie las completó, así que nadie pierde progreso."
+      },
+      "confirmDeleteLesson": {
+        "title": "¿Eliminar esta lección?",
+        "description": "Al guardar, se eliminará. Nadie la completó, así que nadie pierde progreso."
+      },
+      "errors": {
+        "videoId": "Pega el ID del video de Bunny (formato xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx).",
+        "duration": "Escribe la duración como min:seg, por ejemplo 14:54."
+      },
+      "courseDescription": "Descripción",
+      "charCount": "{count}/{max}",
+      "durationPlaceholder": "Ej. 14:54",
+      "videoIdPlaceholder": "Ej. b534be45-7bfd-4b55-981a-931ea20dadb5"
+    },
     "errors": {
       "textRequired": "Completa este campo.",
       "textTooLong": "El texto es demasiado largo.",
@@ -235,6 +289,9 @@
       "saving": "Guardando…",
       "save": "Guardar cambios",
       "confirmLeave": "Tienes cambios sin guardar. ¿Salir sin guardarlos?"
+    },
+    "form": {
+      "completeRequired": "Completa los campos obligatorios para continuar."
     }
   },
   "pillars": {
@@ -341,5 +398,39 @@
       "notFound": "La cuenta ya no existe.",
       "passwordMax": "La contraseña puede tener como máximo 72 caracteres."
     }
+  },
+  "courses": {
+    "title": "Cursos",
+    "description": "Lecciones cortas de cada pilar. Avanza a tu ritmo.",
+    "empty": "Todavía no hay cursos publicados.",
+    "loadError": "No pudimos cargar los cursos. Inténtalo de nuevo.",
+    "notFound": "Este curso o lección no existe o ya no está disponible.",
+    "lessonCount": "1 lección | {count} lecciones",
+    "minutes": "{count} min",
+    "progress": "{done} de {total} lecciones completadas",
+    "start": "Empezar curso",
+    "continue": "Continuar",
+    "review": "Repasar desde el inicio",
+    "back": "Volver a cursos",
+    "backToCourse": "Volver al curso",
+    "lessonNumber": "Lección {number}",
+    "completed": "Completada",
+    "markCompleted": "Marcar como completada",
+    "completeAndNext": "Completar y seguir",
+    "completeError": "No se pudo guardar tu avance. Inténtalo de nuevo.",
+    "videoError": "No pudimos cargar el video. Inténtalo de nuevo.",
+    "nextLesson": "Siguiente lección",
+    "lessonNav": "Navegación entre lecciones",
+    "playerTitle": "Video: {title}",
+    "inactive": "Inactivo",
+    "locked": "Bloqueada",
+    "lockedDescription": "Completa la lección anterior para desbloquear esta.",
+    "goToCurrent": "Ir a mi lección actual",
+    "nextLocked": "Completa esta lección para desbloquear la siguiente",
+    "percentCompleted": "{percent}% completado",
+    "courseContent": "Contenido del curso",
+    "lessonMeta": "Video · {duration}",
+    "lessonMetaNoDuration": "Video",
+    "current": "Lección actual"
   }
 }

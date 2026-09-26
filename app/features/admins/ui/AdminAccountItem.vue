@@ -15,7 +15,7 @@ const editing = defineModel<boolean>('editing', { required: true })
 
 const store = useAdminsStore()
 const { locale } = useI18n()
-const { values, errors, pending, validate } = useZodForm(adminPasswordSchema, { password: '' })
+const { values, errors, pending, isValid, validate, reset } = useZodForm(adminPasswordSchema, { password: '' })
 const status = ref<{ kind: 'saved' } | { kind: 'error', errorKey: string } | null>(null)
 const confirmOpen = ref(false)
 
@@ -23,7 +23,7 @@ const passwordId = computed(() => `admin-password-${props.admin.id}`)
 
 watch(editing, () => {
   values.password = ''
-  errors.value = {}
+  reset()
 })
 
 function errorKeyOf(error: unknown) {
@@ -118,7 +118,7 @@ async function remove() {
         <Button
           type="submit"
           size="sm"
-          :disabled="pending"
+          :disabled="pending || !isValid"
         >
           {{ $t('common.save') }}
         </Button>

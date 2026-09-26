@@ -7,7 +7,7 @@ import { createAdminSchema } from '../data/admins'
 import { useAdminsStore } from '../store'
 
 const store = useAdminsStore()
-const { values, errors, pending, validate } = useZodForm(createAdminSchema, {
+const { values, errors, pending, isValid, validate, reset } = useZodForm(createAdminSchema, {
   displayName: '',
   email: '',
   password: '',
@@ -25,6 +25,7 @@ async function onSubmit() {
     values.displayName = ''
     values.email = ''
     values.password = ''
+    reset()
     status.value = { kind: 'created' }
   }
   catch (error) {
@@ -96,12 +97,14 @@ async function onSubmit() {
       {{ $t('admins.createHint') }}
     </p>
 
-    <Button
-      type="submit"
-      class="self-start"
-      :disabled="pending"
-    >
-      {{ $t('admins.create') }}
-    </Button>
+    <div class="flex flex-wrap items-center gap-3">
+      <Button
+        type="submit"
+        :disabled="pending || !isValid"
+      >
+        {{ $t('admins.create') }}
+      </Button>
+      <RequiredHint v-if="!isValid" />
+    </div>
   </form>
 </template>

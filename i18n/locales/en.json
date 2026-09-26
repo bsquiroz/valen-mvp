@@ -141,6 +141,7 @@
     "sectionDescriptions": {
       "diagnostic": "Review the questions and try the form.",
       "plan": "Manage the steps assigned from the assessment.",
+      "courses": "Create courses per pillar and link the Bunny videos.",
       "admins": "Create and remove admin accounts."
     },
     "diagnostic": {
@@ -213,6 +214,59 @@
       },
       "unsaved": "1 step with unsaved changes | {count} steps with unsaved changes"
     },
+    "courses": {
+      "pageDescription": "Courses for each pillar and their lessons. Videos are uploaded to Bunny and their ID is pasted here.",
+      "count": "{courses} courses · {lessons} lessons",
+      "changesNote": "A lesson any user has completed can't be deleted: deactivate it. People who completed it still see it.",
+      "loadError": "We couldn't load the courses. Please try again.",
+      "inUseError": "Some lessons were already completed by users: deactivate them instead of deleting them.",
+      "unsaved": "1 course with unsaved changes | {count} courses with unsaved changes",
+      "courseTitle": "Course title",
+      "lessonTitle": "Lesson title",
+      "description": "Description (optional)",
+      "videoId": "Bunny video ID",
+      "videoIdHint": "In Bunny: the video ⋯ menu → Copy Video ID.",
+      "duration": "Duration (min:sec, optional)",
+      "addCourseTo": "Add course to {pillar}",
+      "newCourseIn": "New course in {pillar}",
+      "createCourse": "Create course",
+      "editCourse": "Edit course",
+      "deleteCourse": "Delete course",
+      "deactivateCourse": "Deactivate course",
+      "activateCourse": "Activate course",
+      "addLesson": "Add lesson",
+      "newLesson": "New lesson",
+      "createLesson": "Create lesson",
+      "editLesson": "Edit lesson",
+      "deleteLesson": "Delete lesson",
+      "deactivateLesson": "Deactivate lesson",
+      "activateLesson": "Activate lesson",
+      "previewLesson": "View lesson",
+      "previewUnsaved": "Save your changes to view the lesson.",
+      "usage": "Nobody completed it | Completed by 1 user | Completed by {count} users",
+      "deleteLessonDisabled": "Already completed by users: deactivate it instead.",
+      "deleteCourseDisabled": "It has lessons already completed by users: deactivate it instead.",
+      "moveCourse": "Move course {number} of {total}. Use the up and down arrows.",
+      "moveLesson": "Move lesson {number} of {total}. Use the up and down arrows.",
+      "noLessons": "This course has no lessons yet.",
+      "inactive": "Inactive",
+      "confirmDeleteCourse": {
+        "title": "Delete this course?",
+        "description": "When you save, the course and its {count} lessons will be deleted. Nobody completed them, so nobody loses progress."
+      },
+      "confirmDeleteLesson": {
+        "title": "Delete this lesson?",
+        "description": "When you save, it will be deleted. Nobody completed it, so nobody loses progress."
+      },
+      "errors": {
+        "videoId": "Paste the Bunny video ID (format xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx).",
+        "duration": "Enter the duration as min:sec, for example 14:54."
+      },
+      "courseDescription": "Description",
+      "charCount": "{count}/{max}",
+      "durationPlaceholder": "e.g. 14:54",
+      "videoIdPlaceholder": "e.g. b534be45-7bfd-4b55-981a-931ea20dadb5"
+    },
     "errors": {
       "textRequired": "Fill in this field.",
       "textTooLong": "The text is too long.",
@@ -235,6 +289,9 @@
       "saving": "Saving…",
       "save": "Save changes",
       "confirmLeave": "You have unsaved changes. Leave without saving?"
+    },
+    "form": {
+      "completeRequired": "Fill in the required fields to continue."
     }
   },
   "pillars": {
@@ -341,5 +398,39 @@
       "notFound": "The account no longer exists.",
       "passwordMax": "The password can be at most 72 characters."
     }
+  },
+  "courses": {
+    "title": "Courses",
+    "description": "Short lessons for each pillar. Learn at your own pace.",
+    "empty": "There are no published courses yet.",
+    "loadError": "We couldn't load the courses. Please try again.",
+    "notFound": "This course or lesson doesn't exist or is no longer available.",
+    "lessonCount": "1 lesson | {count} lessons",
+    "minutes": "{count} min",
+    "progress": "{done} of {total} lessons completed",
+    "start": "Start course",
+    "continue": "Continue",
+    "review": "Review from the start",
+    "back": "Back to courses",
+    "backToCourse": "Back to course",
+    "lessonNumber": "Lesson {number}",
+    "completed": "Completed",
+    "markCompleted": "Mark as completed",
+    "completeAndNext": "Complete and continue",
+    "completeError": "We couldn't save your progress. Please try again.",
+    "videoError": "We couldn't load the video. Please try again.",
+    "nextLesson": "Next lesson",
+    "lessonNav": "Lesson navigation",
+    "playerTitle": "Video: {title}",
+    "inactive": "Inactive",
+    "locked": "Locked",
+    "lockedDescription": "Complete the previous lesson to unlock this one.",
+    "goToCurrent": "Go to my current lesson",
+    "nextLocked": "Complete this lesson to unlock the next one",
+    "percentCompleted": "{percent}% completed",
+    "courseContent": "Course content",
+    "lessonMeta": "Video · {duration}",
+    "lessonMetaNoDuration": "Video",
+    "current": "Current lesson"
   }
 }

@@ -21,7 +21,7 @@ const emit = defineEmits<{
 }>()
 
 const id = useId()
-const { values, errors, validate } = useZodForm(localizedTextInputSchema, {
+const { values, errors, isValid, validate } = useZodForm(localizedTextInputSchema, {
   es: props.initial?.es ?? '',
   en: props.initial?.en ?? '',
 })
@@ -72,7 +72,11 @@ onMounted(() => formRef.value?.querySelector('input')?.focus())
       />
     </FormField>
     <slot name="extra" />
-    <div class="flex justify-end gap-2">
+    <div class="flex flex-wrap items-center justify-end gap-2">
+      <RequiredHint
+        v-if="!isValid"
+        class="mr-auto"
+      />
       <Button
         type="button"
         variant="ghost"
@@ -85,7 +89,7 @@ onMounted(() => formRef.value?.querySelector('input')?.focus())
       <Button
         type="submit"
         size="sm"
-        :disabled="pending"
+        :disabled="pending || !isValid"
       >
         {{ saveLabel ?? $t('common.save') }}
       </Button>

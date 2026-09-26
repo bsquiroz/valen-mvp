@@ -17,7 +17,7 @@ const emit = defineEmits<{ done: [] }>()
 
 const { editor, run } = useEditorContext()
 const id = useId()
-const { values, errors, pending, validate } = useZodForm(questionFormSchema, emptyQuestionForm())
+const { values, errors, pending, isValid, validate } = useZodForm(questionFormSchema, emptyQuestionForm())
 
 function addRow() {
   if (values.options.length < MAX_OPTIONS) values.options.push(emptyOptionForm())
@@ -154,7 +154,11 @@ onMounted(() => formRef.value?.querySelector('input')?.focus())
       </Button>
     </fieldset>
 
-    <div class="flex justify-end gap-2">
+    <div class="flex flex-wrap items-center justify-end gap-2">
+      <RequiredHint
+        v-if="!isValid"
+        class="mr-auto"
+      />
       <Button
         type="button"
         variant="ghost"
@@ -167,7 +171,7 @@ onMounted(() => formRef.value?.querySelector('input')?.focus())
       <Button
         type="submit"
         size="sm"
-        :disabled="pending"
+        :disabled="pending || !isValid"
       >
         {{ $t('admin.diagnostic.createQuestion') }}
       </Button>

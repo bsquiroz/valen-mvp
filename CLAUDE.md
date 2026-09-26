@@ -10,6 +10,7 @@ MVP de plataforma de desarrollo personal para hombres (ver README.md). Pilares: 
 - Supabase (auth, Postgres y storage) mediante `@nuxtjs/supabase`.
 - Pinia para estado global, Zod para validación y `@nuxtjs/i18n`.
 - `@nuxt/eslint` para lint y Vitest para tests.
+- Videos en Bunny Stream (red Volume, autenticación por token). Las lecciones guardan proveedor + id del video; el enlace firmado lo genera la Edge Function `lesson-video` (secrets `BUNNY_LIBRARY_ID` y `BUNNY_TOKEN_KEY`, nunca en el front).
 
 # Arquitectura
 Por features, en `app/features/<feature>/`:
@@ -51,7 +52,8 @@ El shell de la app (header, navegación inferior móvil, menú de usuario) está
 - Tras cada migración: `npm run db:push` y `npm run db:types` (regenera `app/types/database.types.ts`, no se edita a mano).
 - Supabase da permisos por defecto a `anon`/`authenticated` en tablas nuevas: cada migración hace `revoke all` y concede solo lo necesario.
 - Una sola política permisiva por tabla/rol/acción (combinar condiciones con `or`), y `auth.uid()`/`is_admin()` envueltos en `(select ...)`.
-- Editar contenido nunca le quita progreso a un usuario: un paso del plan que ya está en algún plan no se borra, se desactiva (`admin_save_plan_steps` lo impide), y los pasos nuevos, niveles y desactivaciones aplican solo a planes nuevos.
+- Editar contenido nunca le quita progreso a un usuario: un paso del plan que ya está en algún plan no se borra, se desactiva (`admin_save_plan_steps` lo impide), y los pasos nuevos, niveles y desactivaciones aplican solo a planes nuevos. Igual con las lecciones: una completada por alguien no se borra (`admin_save_courses`) y el usuario sigue viéndola aunque se desactive.
+- Lecciones secuenciales: una lección se desbloquea al completar la anterior del curso. Lo decide `public.lesson_is_unlocked()` (RLS de `lesson_progress` y Edge Function `lesson-video`); en el front, `isLessonUnlocked()` usa el mismo criterio. Completar es definitivo (no se desmarca).
 - Cálculos que el usuario no debe poder falsear (puntajes, progreso) se hacen en funciones de la base, no en el cliente. Si además hay una vista previa de admin, ambas llaman a la misma función de cálculo (p. ej. `compute_diagnostic_scores`).
 - Contenido traducible en la base: columnas `jsonb` `{"es": "...", "en": "..."}` validadas con `is_localized_text()`; en el front, `localizedTextSchema` y `localize()` de `app/lib/localizedText.ts`.
 - Niveles por puntaje: `scoreLevel()` en el front y `public.score_level()` en la base usan los mismos umbrales (<40 bajo, <70 medio); si cambian, cambiar ambos.
@@ -71,7 +73,9 @@ El shell de la app (header, navegación inferior móvil, menú de usuario) está
 # Convenciones
 - Editores de contenido del admin: edición en línea con `LocalizedTextEditor` (ES/EN), `ScoreSelect`, `IconAction` (lápiz/papelera visibles al hover en desktop, siempre en móvil) y `ConfirmDelete` para borrar. Un solo editor abierto a la vez.
 - Borradores sin guardar: `UnsavedChangesBar` (barra con Guardar/Descartar) y `useUnsavedChangesGuard` (avisa antes de salir de la página o cerrar la pestaña). Lo creado en el borrador usa `tempId()` de `app/lib/tempId.ts` y se envía con id `null`.
-- Validar los formularios con Zod y parsear las respuestas de `api/` con los mappers de `data/`.
+- Validar los formularios con Zod (`useZodForm`) y parsear las respuestas de `api/` con los mappers de `data/`.
+- Formularios del admin: el botón de guardar queda deshabilitado mientras `isValid` sea falso (campos obligatorios vacíos o formato inválido), con `RequiredHint` al lado. Los errores de formato se muestran mientras se escribe; los de campos vacíos, al intentar enviar. Las reglas entre campos que deben verse antes (p. ej. descripción en ambos idiomas) usan `params: EARLY_ISSUE`.
+- Duraciones de video: se escriben como `min:seg` y se guardan en segundos (`app/lib/duration.ts`).
 - Diseño mobile-first.
 - Los tests de Vitest cubren como mínimo los mappers y selectors de `data/`.
 
