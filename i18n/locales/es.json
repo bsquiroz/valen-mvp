@@ -545,5 +545,17 @@
       "rateLimited": "Enviaste muchos mensajes en poco tiempo. Inténtalo más tarde.",
       "sendFailed": "No pudimos enviar tu mensaje. Inténtalo de nuevo."
     }
+  },
+  "progress": {
+    "title": "Tu progreso",
+    "total": "{percent}% del programa completado",
+    "sources": {
+      "plan": "Plan {done}/{total}",
+      "lessons": "Lecciones {done}/{total}",
+      "challenges": "Retos {done}/{total}"
+    },
+    "challengesInProgress": "1 reto en curso | {count} retos en curso",
+    "noContent": "Aún no hay contenido en este pilar.",
+    "loadError": "No pudimos cargar tu progreso."
   }
 }

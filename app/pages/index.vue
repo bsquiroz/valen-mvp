@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import DiagnosticSummaryCard from '@/features/diagnostic/ui/DiagnosticSummaryCard.vue'
 import PlanNextStepCard from '@/features/plan/ui/PlanNextStepCard.vue'
+import ProgressDashboard from '@/features/progress/ui/ProgressDashboard.vue'
 import { useProfileStore } from '@/features/profile/store'
 
 const profileStore = useProfileStore()
@@ -13,6 +14,7 @@ const profileStore = useProfileStore()
       :description="$t('home.subtitle')"
     />
     <PlanNextStepCard />
+    <ProgressDashboard />
     <DiagnosticSummaryCard />
   </div>
 </template>

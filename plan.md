@@ -103,8 +103,10 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 - [ ] Admin: gestión de sesiones
 
 ## Fase 9 — Dashboard de progreso
-- [ ] Selectors de progreso por pilar (lecciones, retos, sesiones) + tests
-- [ ] Dashboard con el avance de cada pilar
+- [x] ~~Selectors de progreso por pilar (plan, lecciones y retos; cada fuente pesa igual) + tests~~
+- [x] ~~Dashboard con el avance de cada pilar (tarjeta "Tu progreso" en el inicio)~~
+- [ ] Sumar las sesiones en vivo al progreso cuando exista la fase 8
+- [ ] Probar en el navegador el dashboard de progreso
 
 ## Fase 10 — Comunidad
 - [ ] **Decidir si es propia o externa (Discord/WhatsApp)**
@@ -114,7 +116,8 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 - [ ] **Decidir pagos (Stripe vs. acceso manual para la primera generación)**
 - [ ] Controlar el acceso de la generación (invitación o flag en `profiles`)
 - [ ] Configurar el correo de Supabase (SMTP propio y plantillas en es/en)
-- [ ] Deploy (hosting estático para la SPA) y dominio
+- [x] ~~Deploy de la SPA en Netlify (https://mindsetvalen.netlify.app), con las URLs de Supabase Auth y el dominio permitido en Bunny~~
+- [ ] Dominio propio (actualizar Site URL y Redirect URLs en Supabase y el dominio permitido en Bunny)
 - [ ] Revisión de seguridad de las políticas RLS
 - [ ] Onboarding del primer grupo de usuarios
 - [x] ~~Botón flotante de sugerencias y bugs (tipo + mensaje, máx. 10 por hora) y bandeja en el admin solo para el super admin~~

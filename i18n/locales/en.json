@@ -545,5 +545,17 @@
       "rateLimited": "You sent many messages in a short time. Please try again later.",
       "sendFailed": "We couldn't send your message. Please try again."
     }
+  },
+  "progress": {
+    "title": "Your progress",
+    "total": "{percent}% of the program completed",
+    "sources": {
+      "plan": "Plan {done}/{total}",
+      "lessons": "Lessons {done}/{total}",
+      "challenges": "Challenges {done}/{total}"
+    },
+    "challengesInProgress": "1 challenge in progress | {count} challenges in progress",
+    "noContent": "No content in this pillar yet.",
+    "loadError": "We couldn't load your progress."
   }
 }
