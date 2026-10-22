@@ -557,5 +557,201 @@
     "challengesInProgress": "1 challenge in progress | {count} challenges in progress",
     "noContent": "No content in this pillar yet.",
     "loadError": "We couldn't load your progress."
+  },
+  "landing": {
+    "meta": {
+      "title": "Valen · First generation"
+    },
+    "announcement": {
+      "generation": "First generation · Limited spots",
+      "spotsLeft": "{left} of {total} spots left"
+    },
+    "header": {
+      "login": "Log in",
+      "enroll": "Enroll",
+      "preferences": "Preferences"
+    },
+    "hero": {
+      "chips": {
+        "weeks": "4 weeks",
+        "schedule": "Mon–Thu · 7:00 p.m.",
+        "live": "Live on Zoom"
+      },
+      "titleLead": "Build the version of you",
+      "titleAccent": "that doesn't compromise.",
+      "description": "Mind, body, money and confidence. Four experts, one method and 16 live sessions to build the foundation of the life you want to have at 30.",
+      "cta": "Save my spot",
+      "priceNote": "COP · one-time payment",
+      "countdownTitle": "Generation 01 starts in",
+      "units": {
+        "days": "Days",
+        "hours": "Hours",
+        "minutes": "Min",
+        "seconds": "Sec"
+      }
+    },
+    "problem": {
+      "kicker": "The problem",
+      "title": "You have all the information in the world. What you lack is a system.",
+      "pains": {
+        "discipline": "You watch discipline videos, but you keep putting things off.",
+        "money": "You make money and by the end of the month you don't know where it went.",
+        "training": "You train on and off and quit after two weeks.",
+        "presence": "You know your worth, but you don't show it."
+      },
+      "closing": "Valen turns what you already know into what you finally do."
+    },
+    "pillars": {
+      "titleLine1": "4 pillars.",
+      "titleLine2": "4 experts.",
+      "description": "Each pillar is led by a professional in the field. One week of focus per pillar, all connected to each other.",
+      "week": "Week {n}",
+      "with": "With {pro}",
+      "items": {
+        "psychology": {
+          "name": "The mind",
+          "pro": "a mental health professional",
+          "description": "Anxiety, self-esteem, stress and discipline. A steady mind is what holds everything else up.",
+          "outcomes": {
+            "first": "Handling anxiety and stress",
+            "second": "Discipline that doesn't depend on motivation",
+            "third": "Self-esteem with real grounds"
+          }
+        },
+        "fitness": {
+          "name": "The body",
+          "pro": "a fitness expert",
+          "description": "Training, energy and real habits. A strong body for the life you're going to build.",
+          "outcomes": {
+            "first": "A routine that fits your time",
+            "second": "Sleep and nutrition habits",
+            "third": "Energy all day long"
+          }
+        },
+        "finance": {
+          "name": "The wallet",
+          "pro": "a personal finance expert",
+          "description": "Organize your money, get out of debt and put it to work. Financial peace of mind can be learned.",
+          "outcomes": {
+            "first": "A budget you actually stick to",
+            "second": "A plan to get out of debt",
+            "third": "Your first step into investing"
+          }
+        },
+        "relationships": {
+          "name": "Confidence",
+          "pro": "an interpersonal relationships expert",
+          "description": "Communication, social skills and presence. How you relate to others defines how far you go.",
+          "outcomes": {
+            "first": "Clear, confident communication",
+            "second": "Boundaries without guilt",
+            "third": "Presence in any room"
+          }
+        }
+      }
+    },
+    "quote": "Your 20s aren't for waiting. They're for building.",
+    "schedule": {
+      "title": "Four nights of work. Three to live it.",
+      "description": "Monday to Thursday at 7:00 p.m., live on Zoom. No sessions on Fridays, weekends or holidays: they're for applying, resting and being with your people.",
+      "weeksLabel": "Program weeks",
+      "weekTab": "W{n} · {name}",
+      "time": "7:00 p.m. · Zoom",
+      "days": {
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu"
+      },
+      "topics": {
+        "psychology": {
+          "mon": "Assessment and starting point",
+          "tue": "Core tools",
+          "wed": "Guided practice",
+          "thu": "Plan for the week"
+        },
+        "fitness": {
+          "mon": "Physical assessment",
+          "tue": "Your routine",
+          "wed": "Energy and sleep",
+          "thu": "Habits that stick"
+        },
+        "finance": {
+          "mon": "Your financial snapshot",
+          "tue": "Budget",
+          "wed": "Debt and savings",
+          "thu": "Putting your money to work"
+        },
+        "relationships": {
+          "mon": "Communication",
+          "tue": "Boundaries",
+          "wed": "Social skills",
+          "thu": "Bringing the 4 pillars together"
+        }
+      },
+      "restDays": "Fri · Sat · Sun · Holidays",
+      "restNote": "No session. Apply what you learned and rest."
+    },
+    "pricing": {
+      "kicker": "The investment",
+      "terms": "COP · one payment · 4 weeks",
+      "perSession": "per live session",
+      "sessions": "sessions with 4 experts",
+      "note": "Less than a single private consultation with any of these experts. Here you get all four, for a whole month.",
+      "includes": {
+        "sessions": "16 live sessions on Zoom",
+        "experts": "4 professionals, one per pillar",
+        "schedule": "Monday to Thursday, 7:00 p.m.",
+        "challenges": "Practical challenges every week",
+        "group": "Small first-generation group",
+        "payment": "One payment, no monthly fees"
+      },
+      "spotsTaken": "Spots taken",
+      "cta": "I want one of the {left} spots"
+    },
+    "signup": {
+      "kicker": "Enrollment · Generation 01",
+      "title": "Your place starts here.",
+      "description": "Create your account, take the initial assessment and we'll contact you to confirm your spot and payment. Spots are assigned in order of payment.",
+      "cta": "Create my account",
+      "hasAccount": "Already have an account?",
+      "toLogin": "Log in",
+      "note": "No commitment until you complete the payment."
+    },
+    "faq": {
+      "title": "Questions",
+      "items": {
+        "when": {
+          "q": "When and where are the sessions?",
+          "a": "Monday to Thursday at 7:00 p.m. (Colombia time), live on Zoom. No sessions on Fridays, weekends or holidays."
+        },
+        "duration": {
+          "q": "How long is the program?",
+          "a": "Four weeks. Each week focuses on one pillar, with 4 live sessions: 16 in total."
+        },
+        "price": {
+          "q": "What does the {price} payment include?",
+          "a": "Full access to all four pillars and their professionals, the 16 live sessions and each week's practical challenges."
+        },
+        "missed": {
+          "q": "What if I can't make a session?",
+          "a": "We'll share the session material so you don't lose the thread of the week."
+        },
+        "spots": {
+          "q": "Why are spots limited?",
+          "a": "It's the first generation and we're only opening {total} spots, so the professionals can truly support each person."
+        }
+      }
+    },
+    "closing": {
+      "title": "A year from now you'll wish you had started today.",
+      "cta": "Start with Valen",
+      "copyright": "© {year} Valen",
+      "tagline": "Mind · Body · Wallet · Confidence"
+    },
+    "stickyBar": {
+      "spotsLeft": "{left} spots left",
+      "cta": "Reserve"
+    }
   }
 }

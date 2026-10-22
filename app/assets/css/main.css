@@ -9,6 +9,11 @@
   --radius: 0.625rem;
 }
 
+/* Tipografía de la landing (`font-display`); el paquete se importa en el layout `landing`. */
+@theme {
+  --font-display: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

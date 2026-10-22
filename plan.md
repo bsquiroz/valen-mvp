@@ -113,6 +113,10 @@ Las decisiones de stack y convenciones están en `CLAUDE.md`.
 - [ ] Implementar según la decisión
 
 ## Fase 11 — Acceso y lanzamiento
+- [x] ~~Landing pública `/landing` (réplica de `references/Valen Landing.html` con tokens del tema y Archivo; la inscripción lleva al registro)~~
+- [ ] Landing: foto real en blanco y negro para el hero
+- [ ] Landing: actualizar `LAUNCH` (fecha, cupos tomados, precio) en `features/landing/data/launch.ts` antes de publicar
+- [ ] Decidir si `/` sin sesión redirige a `/landing` en lugar de `/auth/login`
 - [ ] **Decidir pagos (Stripe vs. acceso manual para la primera generación)**
 - [ ] Controlar el acceso de la generación (invitación o flag en `profiles`)
 - [ ] Configurar el correo de Supabase (SMTP propio y plantillas en es/en)

@@ -67,7 +67,7 @@ El shell de la app (header, navegación inferior móvil, menú de usuario) está
 
 # Idioma
 - Código en inglés: identificadores, nombres de archivos, tablas y columnas.
-- Español es el idioma por defecto; no se detecta el idioma del navegador. El usuario lo cambia desde cualquier pantalla con `LocaleSelect` (presente en todos los layouts; todo layout nuevo debe incluirlo). La elección se guarda en localStorage y en `profiles.locale`.
+- Español es el idioma por defecto; no se detecta el idioma del navegador. El usuario lo cambia desde cualquier pantalla con `LocaleSelect` (presente en todos los layouts; todo layout nuevo debe incluirlo, salvo la landing, que ofrece idioma, tema y "Entrar" desde el engranaje `LandingPreferences`). La elección se guarda en localStorage y en `profiles.locale`.
 - Todo texto visible sale de i18n (`es` y `en`). No se escriben strings hardcodeados en templates.
 - Todo texto nuevo se agrega en ambos locales.
 
